@@ -3,25 +3,54 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+
+    .main-container {
+        height: 150vh;
+        background-color: white;
+        padding-top: 64px;
+    }
+    .nav-wrapper {
+        background: radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(162, 155, 254, 1) 100%);
+    }
+    .nav-logo {
+        width: 128px;
+        max-width: 128px;
+    }
+    .nav-menu {
+        margin-left: 12vw;
+        @media (max-width: 768px) {
+            margin-left: 6vw;
+        }
+    }
+    .menu-toggle div {
+        width: 30px;
+        height: 2px;
+        background: #3742fa;
+        opacity: 60%;
+        margin: 5px 0;
+        border-radius: 10px;
+        margin-right: 30px;
+    }
+    .footer-wrapper {
+        background: radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(162, 155, 254, 1) 100%);
+        width: 100%;
+        bottom: 0;
+        position: fixed;
+    }
 }
