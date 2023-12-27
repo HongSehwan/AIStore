@@ -23,7 +23,9 @@ function NavBar() {
             className="nav-wrapper flex fixed w-full t-0  bg-[#a29bfe]/60 h-16 items-center border-b-2 border-b-[#a29bfe] shadow-lg"
         >
             <div className="nav-logo ml-8">
-                <Image className="nav-logo" src="/images/AIStoreLogo.png" alt="LOGO" />
+                <Nav.Link href="/">
+                    <Image className="nav-logo" src="/images/AIStoreLogo.png" alt="LOGO" />
+                </Nav.Link>
             </div>
             <div className="w-full flex justify-between nav-menu">
                 {width >= 680 ? (
