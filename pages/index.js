@@ -132,8 +132,10 @@ function StartPage() {
                 </li>
             </ul>
             <div className="banner-main my-5 mr-5">
-                <div className="banner border-2 rounded-md p-2">
-                    <h1>Banner</h1>
+                <div className="banner border-2 rounded-md">
+                    <div>
+                        <Image className="rounded-t" src="/images/banner1.jpeg" alt="BANNER" width={800} height={500} />
+                    </div>
                 </div>
             </div>
         </div>
