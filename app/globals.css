@@ -4,15 +4,19 @@
 
 :root {
     --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
+    --background-rgb: 255, 255, 255;
+    /* --background-start-rgb: 214, 219, 220; */
+    /* --background-end-rgb: 255, 255, 255; */
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
+        --background-start-rgb: 178, 197, 201;
+        --background-end-rgb: 168, 180, 195;
+        /* --background-rgb: 214, 219, 220; */
+        /* --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0; */
     }
 }
 
@@ -22,7 +26,7 @@ body {
 
     .main-container {
         min-height: 130vh;
-        background-color: white;
+        /* background-color: white; */
         padding-top: 64px;
         padding-bottom: 112px;
     }
@@ -57,7 +61,25 @@ body {
     .list-main {
         list-style: none;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(11.25rem, 100%), 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(14.25rem, 100%), 1fr));
         grid-gap: 1rem;
+        margin: 1.25rem 0;
+        padding: 0 1.25rem;
+        width: 85%;
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+    }
+    .banner-main {
+        width: 12rem;
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+    .banner {
+        width: 12rem;
+        min-height: 30rem;
+        max-height: 30rem;
+        position: fixed;
     }
 }
