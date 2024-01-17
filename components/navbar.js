@@ -20,7 +20,7 @@ function NavBar() {
     return (
         <Nav
             activeKey="/"
-            className="nav-wrapper flex fixed w-full t-0  bg-[#a29bfe]/60 h-16 items-center border-b-2 border-b-[#a29bfe] shadow-lg"
+            className="nav-wrapper flex fixed w-full t-0  bg-[#a29bfe]/60 h-16 items-center border-b-0 border-b-[#000] shadow-lg"
         >
             <div className="nav-logo ml-8">
                 <Nav.Link href="/">
@@ -31,27 +31,27 @@ function NavBar() {
                 {width >= 680 ? (
                     <div className="w-96 flex items-center">
                         <Nav.Item>
-                            <Nav.Link className="text-white font-semibold" href="/best">
+                            <Nav.Link className="text-[#000] font-normal" href="/best">
                                 BEST
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="ml-auto">
-                            <Nav.Link className="text-white font-semibold" href="/new">
+                            <Nav.Link className="text-[#000] font-normal" href="/new">
                                 NEW
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="ml-auto">
-                            <Nav.Link className="text-white font-semibold" href="/outer">
+                            <Nav.Link className="text-[#000] font-normal" href="/outer">
                                 OUTER
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="ml-auto">
-                            <Nav.Link className="text-white font-semibold" href="/pants">
+                            <Nav.Link className="text-[#000] font-normal" href="/pants">
                                 PANTS
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="ml-auto">
-                            <Nav.Link className="text-white font-semibold" href="/shoes">
+                            <Nav.Link className="text-[#000] font-normal" href="/shoes">
                                 SHOES
                             </Nav.Link>
                         </Nav.Item>
@@ -62,13 +62,13 @@ function NavBar() {
                 {width >= 830 ? (
                     <div className="w-32 flex mr-24">
                         <Nav.Item className="ml-6">
-                            <Nav.Link className="text-white font-normal">Join</Nav.Link>
+                            <Nav.Link className="text-[#000] font-light">Join</Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="ml-6">
-                            <Nav.Link className="text-white font-normal">Login</Nav.Link>
+                            <Nav.Link className="text-[#000] font-light">Login</Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="ml-6">
-                            <Nav.Link className="text-white font-normal">Cart</Nav.Link>
+                            <Nav.Link className="text-[#000] font-light">Cart</Nav.Link>
                         </Nav.Item>
                     </div>
                 ) : (
