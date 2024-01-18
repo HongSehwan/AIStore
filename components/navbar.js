@@ -31,7 +31,7 @@ function NavBar() {
                 {width >= 680 ? (
                     <div className="w-96 flex items-center">
                         <Nav.Item>
-                            <Nav.Link className="text-[#000] font-normal" href="/best">
+                            <Nav.Link className="text-[#000] font-normal" href="/">
                                 BEST
                             </Nav.Link>
                         </Nav.Item>
@@ -43,6 +43,11 @@ function NavBar() {
                         <Nav.Item className="ml-auto">
                             <Nav.Link className="text-[#000] font-normal" href="/outer">
                                 OUTER
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item className="ml-auto">
+                            <Nav.Link className="text-[#000] font-normal" href="/top">
+                                TOP
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="ml-auto">
