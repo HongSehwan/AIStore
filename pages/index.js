@@ -11,7 +11,23 @@ function StartPage() {
                             <div className="h-3/4">
                                 <Image className="rounded-t max-h-44" src={item.img} alt="Clothing" width={800} height={500} />
                             </div>
-                            <div className="p-2 h-1/4">{item.name}</div>
+                            <div className="flex justify-between">
+                                <div>
+                                    <div className="pl-2 pt-px h-1/4">
+                                        <p>{item.name}</p>
+                                    </div>
+                                    <div className="flex px-2 pt-3.5">
+                                        {item.size.map((s, idx) => (
+                                            <span className="mr-2 text-sm" key={idx}>
+                                                {s}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="pr-2">
+                                    <div>a</div>
+                                </div>
+                            </div>
                         </li>
                     ))
                 ) : (
