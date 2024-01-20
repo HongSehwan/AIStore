@@ -1,5 +1,6 @@
 import Image from "next/image";
 import storeItem from "../data/dummy";
+import colorVariants from "../data/color";
 
 function StartPage() {
     return (
@@ -17,15 +18,18 @@ function StartPage() {
                                         <p>{item.name}</p>
                                     </div>
                                     <div className="flex px-2 pt-3.5">
-                                        {item.size.map((s, idx) => (
+                                        <span className="mr-2 text-sm">SIZE:</span>
+                                        {item.size.slice(0, 3).map((s, idx) => (
                                             <span className="mr-2 text-sm" key={idx}>
                                                 {s}
                                             </span>
                                         ))}
                                     </div>
                                 </div>
-                                <div className="pr-2">
-                                    <div>a</div>
+                                <div className="flex pr-2 pt-2">
+                                    {item.color.map((c, idx) => (
+                                        <div className={`w-3 border max-h-3 ${colorVariants[c]}`} key={idx}></div>
+                                    ))}
                                 </div>
                             </div>
                         </li>
