@@ -2,12 +2,22 @@ import "tailwindcss/tailwind.css";
 import { useEffect, useState } from "react";
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
+import Modal from "./Modal";
 
 function NavBar() {
     const [width, setWidth] = useState(10000);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleResize = () => {
         setWidth(window.innerWidth);
+    };
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
     useEffect(() => {
@@ -70,11 +80,17 @@ function NavBar() {
                             <Nav.Link className="text-[#000] font-light">Join</Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="ml-6">
-                            <Nav.Link className="text-[#000] font-light">Login</Nav.Link>
+                            <Nav.Link className="text-[#000] font-light" onClick={openModal}>
+                                Login
+                            </Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="ml-6">
                             <Nav.Link className="text-[#000] font-light">Cart</Nav.Link>
                         </Nav.Item>
+                        <Modal isOpen={isModalOpen} onClose={closeModal}>
+                            <h2>Modal Content</h2>
+                            <p>This is the content of the modal.</p>
+                        </Modal>
                     </div>
                 ) : (
                     <div className="menu-toggle">
