@@ -1,5 +1,7 @@
 import Image from "next/image";
-import storeItem, { ClothingItem } from "../data/dummy";
+import storeItem, { ClothingItem } from "@/data/dummy";
+import Carousel from "@/components/Carousel";
+import { useEffect, useRef } from "react";
 
 interface StartPageProps {
     // Add any necessary props
@@ -22,48 +24,51 @@ const colorVariants: { [key: string]: string } = {
 
 const StartPage: React.FC<StartPageProps> = () => {
     return (
-        <div className="flex">
-            <ul className="list-main">
-                {storeItem.length > 0 ? (
-                    storeItem.map((item: ClothingItem, idx: number) => (
-                        <li className="border-2 min-h-60 rounded-md" key={idx}>
-                            <div className="h-3/4">
-                                <Image className="rounded-t max-h-44" src={item.img} alt="Clothing" width={800} height={500} />
-                            </div>
-                            <div className="flex justify-between">
-                                <div>
-                                    <div className="pl-2 pt-px h-1/4">
-                                        <p>{item.name}</p>
+        <>
+            <Carousel />
+            <div className="flex">
+                <ul className="list-main">
+                    {storeItem.length > 0 ? (
+                        storeItem.map((item: ClothingItem, idx: number) => (
+                            <li className="border-2 min-h-60 rounded-md" key={idx}>
+                                <div className="h-3/4">
+                                    <Image className="rounded-t max-h-44" src={item.img} alt="Clothing" width={800} height={500} />
+                                </div>
+                                <div className="flex justify-between">
+                                    <div>
+                                        <div className="pl-2 pt-px h-1/4">
+                                            <p>{item.name}</p>
+                                        </div>
+                                        <div className="flex px-2 pt-3.5">
+                                            <span className="mr-2 text-sm">SIZE:</span>
+                                            {item.size.slice(0, 3).map((s, idx) => (
+                                                <span className="mr-2 text-sm" key={idx}>
+                                                    {s}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
-                                    <div className="flex px-2 pt-3.5">
-                                        <span className="mr-2 text-sm">SIZE:</span>
-                                        {item.size.slice(0, 3).map((s, idx) => (
-                                            <span className="mr-2 text-sm" key={idx}>
-                                                {s}
-                                            </span>
+                                    <div className="flex pr-2 pt-2">
+                                        {item.color.map((c, idx) => (
+                                            <div className={`w-3 border max-h-3 ${colorVariants[c]}`} key={idx}></div>
                                         ))}
                                     </div>
                                 </div>
-                                <div className="flex pr-2 pt-2">
-                                    {item.color.map((c, idx) => (
-                                        <div className={`w-3 border max-h-3 ${colorVariants[c]}`} key={idx}></div>
-                                    ))}
-                                </div>
-                            </div>
-                        </li>
-                    ))
-                ) : (
-                    <div></div>
-                )}
-            </ul>
-            <div className="banner-main my-5 mr-5">
-                <div className="banner border-2 rounded-md">
-                    <div>
-                        <Image className="rounded-t" src="/images/banner1.jpeg" alt="BANNER" width={800} height={500} />
+                            </li>
+                        ))
+                    ) : (
+                        <div></div>
+                    )}
+                </ul>
+                <div className="banner-main-home my-5 mr-5">
+                    <div className="banner-home border-2 rounded-md">
+                        <div>
+                            <Image className="rounded-t" src="/images/banner1.jpeg" alt="BANNER" width={800} height={500} />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

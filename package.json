@@ -9,6 +9,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@reacticons/ionicons": "^7.1.0",
         "@types/react-bootstrap": "^0.32.35",
         "bootstrap": "^5.3.2",
         "moment": "^2.29.4",

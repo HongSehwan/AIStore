@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import storeItem, { ClothingItem } from "../data/dummy";
+import storeItem, { ClothingItem } from "@/data/dummy";
 
 interface ShoesPageProps {
     // Add any necessary props
