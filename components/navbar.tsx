@@ -11,7 +11,7 @@ interface NavBarProps {
 const NavBar: React.FC<NavBarProps> = () => {
     const [width, setWidth] = useState<number>(window.innerWidth);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const targetRef = useRef<any>(null);
+    const targetRef = useRef<any>(0);
 
     const handleScroll = () => {
         console.log("scrolling");
@@ -38,25 +38,21 @@ const NavBar: React.FC<NavBarProps> = () => {
     };
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            window.addEventListener("scroll", handleScroll);
-            window.addEventListener("resize", handleResize);
-        }, 100);
+        window.addEventListener("resize", handleResize);
+        window.addEventListener("scroll", handleScroll);
+        if (window.scrollY > 200 && targetRef) {
+            targetRef.current.style.display = "block";
+        }
+
+        if (window.scrollY <= 200 && targetRef) {
+            targetRef.current.style.display = "none";
+        }
         return () => {
             // cleanup
-            clearInterval(timer);
-            window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("resize", handleResize);
+            window.removeEventListener("scroll", handleScroll);
         };
     }, []);
-
-    // useEffect(() => {
-    //     window.addEventListener("resize", handleResize);
-    //     return () => {
-    //         // cleanup
-    //         window.removeEventListener("resize", handleResize);
-    //     };
-    // }, []);
 
     return (
         <>
