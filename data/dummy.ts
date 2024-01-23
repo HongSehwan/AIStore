@@ -1,0 +1,173 @@
+export interface ClothingItem {
+    type: string;
+    name: string;
+    size: string[];
+    gender: string[];
+    color: string[];
+    img: string;
+}
+
+const storeItem: ClothingItem[] = [
+    {
+        type: "top",
+        name: "라운드 니트",
+        size: ["free"],
+        gender: ["female"],
+        color: ["cyan", "gray", "pink", "red", "white"],
+        img: "/images/clothing1.jpeg",
+    },
+    {
+        type: "top",
+        name: "상의 모음(후드, 티, 니트)",
+        size: ["free"],
+        gender: ["male", "female"],
+        color: ["amber", "stone", "emerald", "gray", "indigo", "orange", "pink", "white"],
+        img: "/images/clothing2.jpeg",
+    },
+    {
+        type: "top",
+        name: "남성 반팔 라운드 티",
+        size: ["free"],
+        gender: ["male"],
+        color: ["stone", "gray", "white"],
+        img: "/images/clothing3.jpeg",
+    },
+    {
+        type: "top",
+        name: "여성복 특가 자켓(원피스 포함)",
+        size: ["free"],
+        gender: ["female"],
+        color: ["amber", "orange"],
+        img: "/images/clothing4.jpeg",
+    },
+    {
+        type: "top",
+        name: "남성 후드",
+        size: ["free"],
+        gender: ["male"],
+        color: ["white"],
+        img: "/images/clothing5.jpeg",
+    },
+    {
+        type: "top",
+        name: "여성 반팔 라운드 티",
+        size: ["free"],
+        gender: ["female"],
+        color: ["white"],
+        img: "/images/clothing6.jpeg",
+    },
+    {
+        type: "pants",
+        name: "남성 데일리룩 반바지",
+        size: ["L", "XL"],
+        gender: ["male"],
+        color: ["indigo"],
+        img: "/images/pants1.jpeg",
+    },
+    {
+        type: "pants",
+        name: "여성 와이드 슬랙스",
+        size: ["XS", "S", "M"],
+        gender: ["female"],
+        color: ["amber"],
+        img: "/images/pants2.jpeg",
+    },
+    {
+        type: "pants",
+        name: "[특가] 여성 면바지",
+        size: ["S", "M"],
+        gender: ["female"],
+        color: ["sky"],
+        img: "/images/pants3.jpeg",
+    },
+    {
+        type: "pants",
+        name: "여성 골덴 팬츠",
+        size: ["XS", "S", "M"],
+        gender: ["female"],
+        color: ["red"],
+        img: "/images/pants4.jpeg",
+    },
+    {
+        type: "shoes",
+        name: "남성 서클링 구두",
+        size: ["270", "280"],
+        gender: ["male"],
+        color: ["stone"],
+        img: "/images/shoes1.jpeg",
+    },
+    {
+        type: "shoes",
+        name: "남) 스니커즈 운동화",
+        size: ["250", "260", "270"],
+        gender: ["male"],
+        color: ["white"],
+        img: "/images/shoes2.jpeg",
+    },
+    {
+        type: "shoes",
+        name: "여)소가죽 미들 부츠",
+        size: ["230", "240"],
+        gender: ["female"],
+        color: ["stone"],
+        img: "/images/shoes3.jpeg",
+    },
+    {
+        type: "shoes",
+        name: "[특가] 남성 단화",
+        size: ["250", "260", "270"],
+        gender: ["male"],
+        color: ["blue"],
+        img: "/images/shoes4.jpeg",
+    },
+    {
+        type: "shoes",
+        name: "실용성 남/여 운동화",
+        size: ["230", "240", "250", "260", "270", "280", "290"],
+        gender: ["male", "female"],
+        color: ["white"],
+        img: "/images/shoes5.jpeg",
+    },
+    {
+        type: "outerwear",
+        name: "여성 데일리룩 롱코트",
+        size: ["S", "M", "L"],
+        gender: ["female"],
+        color: ["orange"],
+        img: "/images/outerwear1.jpeg",
+    },
+    {
+        type: "outerwear",
+        name: "남성 청자켓",
+        size: ["M", "L", "XL"],
+        gender: ["male"],
+        color: ["sky"],
+        img: "/images/outerwear2.jpeg",
+    },
+    {
+        type: "outerwear",
+        name: "여성 털 코트",
+        size: ["M", "L"],
+        gender: ["female"],
+        color: ["orange"],
+        img: "/images/outerwear3.jpeg",
+    },
+    {
+        type: "outerwear",
+        name: "여성 린넨 자켓",
+        size: ["XS", "S", "M"],
+        gender: ["female"],
+        color: ["amber"],
+        img: "/images/outerwear4.jpeg",
+    },
+    {
+        type: "outerwear",
+        name: "남/여 오리털 패딩 자켓",
+        size: ["S", "M", "L", "XL"],
+        gender: ["male", "female"],
+        color: ["blue"],
+        img: "/images/outerwear5.jpeg",
+    },
+];
+
+export default storeItem;

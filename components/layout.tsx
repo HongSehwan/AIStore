@@ -1,9 +1,14 @@
+import React, { ReactNode } from "react";
 import "../app/globals.css";
 import "tailwindcss/tailwind.css";
-import NavBar from "../components/navbar";
-import Footer from "../components/footer";
+import NavBar from "./navbar";
+import Footer from "./footer";
 
-export default function Layout({ children }) {
+interface LayoutProps {
+    children: ReactNode;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <div>
             <nav>
@@ -19,4 +24,6 @@ export default function Layout({ children }) {
             </footer>
         </div>
     );
-}
+};
+
+export default Layout;

@@ -1,36 +1,39 @@
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import storeItem from "../data/dummy";
+import storeItem, { ClothingItem } from "../data/dummy";
 
-function PantsPage() {
-    const [pantsItem, setPantsItem] = useState([]);
+interface ShoesPageProps {
+    // Add any necessary props
+}
+
+const colorVariants: { [key: string]: string } = {
+    blue: "bg-blue-600 hover:bg-blue-500",
+    red: "bg-red-600 hover:bg-red-500",
+    white: "bg-white-600 hover:bg-white-500",
+    gray: "bg-gray-600 hover:bg-gray-500",
+    pink: "bg-pink-600 hover:bg-pink-500",
+    cyan: "bg-cyan-600 hover:bg-cyan-500",
+    sky: "bg-sky-600 hover:bg-sky-500",
+    indigo: "bg-indigo-600 hover:bg-indigo-500",
+    stone: "bg-stone-900 hover:bg-stone-800",
+    emerald: "bg-emerald-600 hover:bg-emerald-500",
+    amber: "bg-amber-100 hover:bg-amber-50",
+    orange: "bg-orange-800 hover:bg-orange-700",
+};
+
+const ShoesPage: React.FC<ShoesPageProps> = () => {
+    const [shoesItem, setShoesItem] = useState<ClothingItem[]>([]);
 
     useEffect(() => {
-        let pants = storeItem.clothing.filter((item) => item.type === "pants");
-        setPantsItem(pants);
+        let shoes = storeItem.filter((item) => item.type === "shoes");
+        setShoesItem(shoes);
     }, []);
-
-    const colorVariants = {
-        blue: "bg-blue-600 hover:bg-blue-500",
-        red: "bg-red-600 hover:bg-red-500",
-        white: "bg-white-600 hover:bg-white-500",
-        gray: "bg-gray-600 hover:bg-gray-500",
-        pink: "bg-pink-600 hover:bg-pink-500",
-        cyan: "bg-cyan-600 hover:bg-cyan-500",
-        sky: "bg-sky-600 hover:bg-sky-500",
-        indigo: "bg-indigo-600 hover:bg-indigo-500",
-        stone: "bg-stone-900 hover:bg-stone-800",
-        emerald: "bg-emerald-600 hover:bg-emerald-500",
-        amber: "bg-amber-100 hover:bg-amber-50",
-        orange: "bg-orange-800 hover:bg-orange-700",
-        indigo: "bg-indigo-600 hover:bg-indigo-500",
-    };
 
     return (
         <div className="flex">
             <ul className="list-main">
-                {pantsItem.length > 0 ? (
-                    pantsItem.map((item, idx) => (
+                {shoesItem.length > 0 ? (
+                    shoesItem.map((item, idx) => (
                         <li className="border-2 min-h-60 rounded-md" key={idx}>
                             <div className="h-3/4">
                                 <Image className="rounded-t max-h-44" src={item.img} alt="Clothing" width={800} height={500} />
@@ -70,6 +73,6 @@ function PantsPage() {
             </div>
         </div>
     );
-}
+};
 
-export default PantsPage;
+export default ShoesPage;

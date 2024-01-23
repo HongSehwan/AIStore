@@ -4,9 +4,13 @@ import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
 import Modal from "./Modal";
 
-function NavBar() {
-    const [width, setWidth] = useState(10000);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+interface NavBarProps {
+    // Add any props if needed
+}
+
+const NavBar: React.FC<NavBarProps> = () => {
+    const [width, setWidth] = useState<number>(10000);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const handleResize = () => {
         setWidth(window.innerWidth);
@@ -27,6 +31,7 @@ function NavBar() {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
     return (
         <Nav
             activeKey="/"
@@ -102,6 +107,6 @@ function NavBar() {
             </div>
         </Nav>
     );
-}
+};
 
 export default NavBar;

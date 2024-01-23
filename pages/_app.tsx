@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Layout from "components/layout";
+import Layout from "@/components/layout";
 
-export default function MyApp({ Component, pageProps }) {
+interface MyAppProps {
+    Component: React.ComponentType<any>;
+    pageProps: any;
+}
+
+export default function MyApp({ Component, pageProps }: MyAppProps) {
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
@@ -16,6 +21,7 @@ export default function MyApp({ Component, pageProps }) {
         div.id = "modal-root";
         document.body.appendChild(div);
     }
+
     return (
         isClient && (
             <Layout>
