@@ -144,7 +144,7 @@ body {
     .sliderWrapper {
         position: relative;
         width: 100%;
-        height: 50vh;
+        height: 80vh;
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
     }
 
@@ -187,15 +187,18 @@ body {
             left: calc(50% + 660px);
             opacity: 0;
         }
+        &:nth-child(n + 6) {
+            display: none;
+        }
     }
 
     .sliderContent {
-        width: min(30vw, 400px);
+        width: min(35vw, 400px);
         position: absolute;
         top: 50%;
         left: 3rem;
         transform: translateY(-50%);
-        font: 400 0.85rem helvetica, sans-serif;
+        font: 700 2rem helvetica, sans-serif;
         color: white;
         text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
         opacity: 0;
@@ -209,30 +212,52 @@ body {
         & .sliderDescription {
             line-height: 1.7;
             margin: 1rem 0 1.5rem;
-            font-size: 0.8rem;
+            font-size: 1rem;
+            font-weight: 400;
         }
 
         & button {
             width: fit-content;
             background-color: rgba(0, 0, 0, 0.1);
             color: white;
+            font-size: 0.8rem;
+            font-weight: 400;
             border: 2px solid white;
             border-radius: 0.25rem;
-            padding: 0.75rem;
+            padding: 1rem;
             cursor: pointer;
         }
     }
 
-    @media (width > 650px) and (width < 900px) {
+    @media (width > 900px) and (width <= 1024px) {
+        .sliderItem {
+            &:nth-child(n + 5) {
+                display: none;
+            }
+        }
         .sliderContent {
             & .sliderTitle {
-                font-size: 1rem;
+                font-size: 1.7rem;
             }
             & .sliderDescription {
-                font-size: 0.7rem;
+                font-size: 1.3rem;
             }
             & button {
-                font-size: 0.7rem;
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    @media (width > 650px) and (width <= 900px) {
+        .sliderContent {
+            & .sliderTitle {
+                font-size: 1.35rem;
+            }
+            & .sliderDescription {
+                font-size: 1rem;
+            }
+            & button {
+                font-size: 1rem;
             }
         }
         .sliderItem {
@@ -245,27 +270,23 @@ body {
             &:nth-child(4) {
                 left: calc(50% + 170px);
             }
-            &:nth-child(5) {
-                left: calc(50% + 340px);
-            }
-            &:nth-child(6) {
-                left: calc(50% + 510px);
-                opacity: 0;
+            &:nth-child(n + 5) {
+                display: none;
             }
         }
     }
 
-    @media (width < 650px) {
+    @media (width > 400px) and (width <= 650px) {
         .sliderContent {
             left: 2rem;
             & .sliderTitle {
-                font-size: 0.9rem;
+                font-size: 1.2rem;
             }
             & .sliderDescription {
-                font-size: 0.65rem;
+                font-size: 0.9rem;
             }
             & button {
-                font-size: 0.7rem;
+                font-size: 0.9rem;
             }
         }
         .sliderItem {
@@ -275,27 +296,46 @@ body {
             &:nth-child(3) {
                 left: 50%;
             }
-            &:nth-child(4) {
-                left: calc(50% + 140px);
-            }
-            &:nth-child(5) {
-                left: calc(50% + 280px);
-            }
-            &:nth-child(6) {
-                left: calc(50% + 420px);
-                opacity: 0;
+            &:nth-child(n + 4) {
+                display: none;
             }
         }
     }
 
-    @media (width < 300px) {
+    @media (width > 300px) and (width <= 400px) {
+        .sliderContent {
+            left: 2rem;
+            & .sliderTitle {
+                font-size: 1.1rem;
+            }
+            & .sliderDescription {
+                font-size: 0.8rem;
+            }
+            & button {
+                font-size: 0.8rem;
+            }
+        }
+        .sliderItem {
+            width: 130px;
+            height: 220px;
+
+            &:nth-child(3) {
+                left: 50%;
+            }
+            &:nth-child(n + 4) {
+                display: none;
+            }
+        }
+    }
+
+    @media (width <= 300px) {
         .sliderContent {
             left: 1rem;
             & .sliderTitle {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
             & .sliderDescription {
-                font-size: 0.65rem;
+                font-size: 0.7rem;
             }
             & button {
                 font-size: 0.7rem;
@@ -308,15 +348,8 @@ body {
             &:nth-child(3) {
                 left: 50% !important;
             }
-            &:nth-child(4) {
-                left: calc(50% + 140px);
-            }
-            &:nth-child(5) {
-                left: calc(50% + 280px);
-            }
-            &:nth-child(6) {
-                left: calc(50% + 420px);
-                opacity: 0;
+            &:nth-child(n + 4) {
+                display: none;
             }
         }
     }

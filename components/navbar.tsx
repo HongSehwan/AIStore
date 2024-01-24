@@ -14,8 +14,6 @@ const NavBar: React.FC<NavBarProps> = () => {
     const targetRef = useRef<any>(0);
 
     const handleScroll = () => {
-        console.log("scrolling");
-        console.log(window.scrollY);
         if (window.scrollY > 200 && targetRef) {
             targetRef.current.style.display = "block";
         }
