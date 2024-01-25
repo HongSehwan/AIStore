@@ -1,8 +1,8 @@
 import "tailwindcss/tailwind.css";
 import { useEffect, useRef, useState } from "react";
 import Nav from "react-bootstrap/Nav";
-import Image from "react-bootstrap/Image";
-import Modal from "./Modal";
+import Image from "next/image";
+// import Modal from "./Modal";
 
 interface NavBarProps {
     // Add any props if needed
@@ -60,7 +60,7 @@ const NavBar: React.FC<NavBarProps> = () => {
             >
                 <div className="nav-logo ml-8">
                     <Nav.Link href="/">
-                        <Image className="nav-logo" src="/images/AIStoreLogo.png" alt="LOGO" />
+                        <Image className="nav-logo" src="/images/AIStoreLogo.png" alt="LOGO" width={800} height={500} />
                     </Nav.Link>
                 </div>
                 <div className="w-full flex justify-between nav-menu">
@@ -103,20 +103,29 @@ const NavBar: React.FC<NavBarProps> = () => {
                     {width >= 830 ? (
                         <div className="w-32 flex mr-24">
                             <Nav.Item className="ml-6">
-                                <Nav.Link className="text-[#000] font-light">Join</Nav.Link>
+                                <Nav.Link className="text-[#000] font-light" href="/join">
+                                    Join
+                                </Nav.Link>
                             </Nav.Item>
-                            <Nav.Item className="ml-6">
+                            {/* <Nav.Item className="ml-6">
                                 <Nav.Link className="text-[#000] font-light" onClick={openModal}>
+                                    Login
+                                </Nav.Link>
+                            </Nav.Item> */}
+                            <Nav.Item className="ml-6">
+                                <Nav.Link className="text-[#000] font-light" href="/login">
                                     Login
                                 </Nav.Link>
                             </Nav.Item>
                             <Nav.Item className="ml-6">
-                                <Nav.Link className="text-[#000] font-light">Cart</Nav.Link>
+                                <Nav.Link className="text-[#000] font-light" href="/cart">
+                                    Cart
+                                </Nav.Link>
                             </Nav.Item>
-                            <Modal isOpen={isModalOpen} onClose={closeModal}>
-                                <h2>Modal Content</h2>
+                            {/* <Modal isOpen={isModalOpen} onClose={closeModal}>
+                                <h2>LOGIN</h2>
                                 <p>This is the content of the modal.</p>
-                            </Modal>
+                            </Modal> */}
                         </div>
                     ) : (
                         <div className="menu-toggle">
