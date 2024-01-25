@@ -60,7 +60,7 @@ const NavBar: React.FC<NavBarProps> = () => {
             >
                 <div className="nav-logo ml-8">
                     <Nav.Link href="/">
-                        <Image className="nav-logo" src="/images/AIStoreLogo.png" alt="LOGO" width={800} height={500} />
+                        <Image className="nav-logo" src="/images/AIStoreLogo.webp" alt="LOGO" width={800} height={500} />
                     </Nav.Link>
                 </div>
                 <div className="w-full flex justify-between nav-menu">

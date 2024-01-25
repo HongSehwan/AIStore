@@ -14,7 +14,7 @@ const storeItem: ClothingItem[] = [
         size: ["free"],
         gender: ["female"],
         color: ["cyan", "gray", "pink", "red", "white"],
-        img: "/images/clothing1.jpeg",
+        img: "/images/clothing1.webp",
     },
     {
         type: "top",
@@ -22,7 +22,7 @@ const storeItem: ClothingItem[] = [
         size: ["free"],
         gender: ["male", "female"],
         color: ["amber", "stone", "emerald", "gray", "indigo", "orange", "pink", "white"],
-        img: "/images/clothing2.jpeg",
+        img: "/images/clothing2.webp",
     },
     {
         type: "top",
@@ -30,7 +30,7 @@ const storeItem: ClothingItem[] = [
         size: ["free"],
         gender: ["male"],
         color: ["stone", "gray", "white"],
-        img: "/images/clothing3.jpeg",
+        img: "/images/clothing3.webp",
     },
     {
         type: "top",
@@ -38,7 +38,7 @@ const storeItem: ClothingItem[] = [
         size: ["free"],
         gender: ["female"],
         color: ["amber", "orange"],
-        img: "/images/clothing4.jpeg",
+        img: "/images/clothing4.webp",
     },
     {
         type: "top",
@@ -46,7 +46,7 @@ const storeItem: ClothingItem[] = [
         size: ["free"],
         gender: ["male"],
         color: ["white"],
-        img: "/images/clothing5.jpeg",
+        img: "/images/clothing5.webp",
     },
     {
         type: "top",
@@ -54,7 +54,7 @@ const storeItem: ClothingItem[] = [
         size: ["free"],
         gender: ["female"],
         color: ["white"],
-        img: "/images/clothing6.jpeg",
+        img: "/images/clothing6.webp",
     },
     {
         type: "pants",
@@ -62,7 +62,7 @@ const storeItem: ClothingItem[] = [
         size: ["L", "XL"],
         gender: ["male"],
         color: ["indigo"],
-        img: "/images/pants1.jpeg",
+        img: "/images/pants1.webp",
     },
     {
         type: "pants",
@@ -70,7 +70,7 @@ const storeItem: ClothingItem[] = [
         size: ["XS", "S", "M"],
         gender: ["female"],
         color: ["amber"],
-        img: "/images/pants2.jpeg",
+        img: "/images/pants2.webp",
     },
     {
         type: "pants",
@@ -78,7 +78,7 @@ const storeItem: ClothingItem[] = [
         size: ["S", "M"],
         gender: ["female"],
         color: ["sky"],
-        img: "/images/pants3.jpeg",
+        img: "/images/pants3.webp",
     },
     {
         type: "pants",
@@ -86,7 +86,7 @@ const storeItem: ClothingItem[] = [
         size: ["XS", "S", "M"],
         gender: ["female"],
         color: ["red"],
-        img: "/images/pants4.jpeg",
+        img: "/images/pants4.webp",
     },
     {
         type: "shoes",
@@ -94,7 +94,7 @@ const storeItem: ClothingItem[] = [
         size: ["270", "280"],
         gender: ["male"],
         color: ["stone"],
-        img: "/images/shoes1.jpeg",
+        img: "/images/shoes1.webp",
     },
     {
         type: "shoes",
@@ -102,7 +102,7 @@ const storeItem: ClothingItem[] = [
         size: ["250", "260", "270"],
         gender: ["male"],
         color: ["white"],
-        img: "/images/shoes2.jpeg",
+        img: "/images/shoes2.webp",
     },
     {
         type: "shoes",
@@ -110,7 +110,7 @@ const storeItem: ClothingItem[] = [
         size: ["230", "240"],
         gender: ["female"],
         color: ["stone"],
-        img: "/images/shoes3.jpeg",
+        img: "/images/shoes3.webp",
     },
     {
         type: "shoes",
@@ -118,7 +118,7 @@ const storeItem: ClothingItem[] = [
         size: ["250", "260", "270"],
         gender: ["male"],
         color: ["blue"],
-        img: "/images/shoes4.jpeg",
+        img: "/images/shoes4.webp",
     },
     {
         type: "shoes",
@@ -126,7 +126,7 @@ const storeItem: ClothingItem[] = [
         size: ["230", "240", "250", "260", "270", "280", "290"],
         gender: ["male", "female"],
         color: ["white"],
-        img: "/images/shoes5.jpeg",
+        img: "/images/shoes5.webp",
     },
     {
         type: "outerwear",
@@ -134,7 +134,7 @@ const storeItem: ClothingItem[] = [
         size: ["S", "M", "L"],
         gender: ["female"],
         color: ["orange"],
-        img: "/images/outerwear1.jpeg",
+        img: "/images/outerwear1.webp",
     },
     {
         type: "outerwear",
@@ -142,7 +142,7 @@ const storeItem: ClothingItem[] = [
         size: ["M", "L", "XL"],
         gender: ["male"],
         color: ["sky"],
-        img: "/images/outerwear2.jpeg",
+        img: "/images/outerwear2.webp",
     },
     {
         type: "outerwear",
@@ -150,7 +150,7 @@ const storeItem: ClothingItem[] = [
         size: ["M", "L"],
         gender: ["female"],
         color: ["orange"],
-        img: "/images/outerwear3.jpeg",
+        img: "/images/outerwear3.webp",
     },
     {
         type: "outerwear",
@@ -158,7 +158,7 @@ const storeItem: ClothingItem[] = [
         size: ["XS", "S", "M"],
         gender: ["female"],
         color: ["amber"],
-        img: "/images/outerwear4.jpeg",
+        img: "/images/outerwear4.webp",
     },
     {
         type: "outerwear",
@@ -166,7 +166,7 @@ const storeItem: ClothingItem[] = [
         size: ["S", "M", "L", "XL"],
         gender: ["male", "female"],
         color: ["blue"],
-        img: "/images/outerwear5.jpeg",
+        img: "/images/outerwear5.webp",
     },
 ];
 
