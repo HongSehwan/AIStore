@@ -136,7 +136,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                     )}
                 </div>
             </Nav>
-            <div className="sideMenu border-2 border-gray-400 bg-gray-400 rounded-lg" ref={targetRef}>
+            <div className="sideMenu border-gray-400 bg-stone-600 rounded-lg cursor-pointer" ref={targetRef}>
                 <h1 className="flex items-center justify-center h-full text-gray-50 font-semibold">TOP</h1>
             </div>
         </>

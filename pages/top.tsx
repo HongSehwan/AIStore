@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import storeItem, { ClothingItem } from "@/data/dummy";
+import Image from "next/image";
+import moment from "moment";
 
 interface TopPageProps {
     // Add any necessary props
@@ -9,7 +10,7 @@ interface TopPageProps {
 const colorVariants: { [key: string]: string } = {
     blue: "bg-blue-600 hover:bg-blue-500",
     red: "bg-red-600 hover:bg-red-500",
-    white: "bg-white-600 hover:bg-white-500",
+    white: "bg-slate-200 hover:bg-slate-100",
     gray: "bg-gray-600 hover:bg-gray-500",
     pink: "bg-pink-600 hover:bg-pink-500",
     cyan: "bg-cyan-600 hover:bg-cyan-500",
@@ -24,6 +25,11 @@ const colorVariants: { [key: string]: string } = {
 const TopPage: React.FC<TopPageProps> = () => {
     const [topItem, setTopItem] = useState<ClothingItem[]>([]);
 
+    const addComma = (price: number) => {
+        let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return returnString;
+    };
+
     useEffect(() => {
         let top = storeItem.filter((item) => item.type === "top");
         setTopItem(top);
@@ -34,29 +40,41 @@ const TopPage: React.FC<TopPageProps> = () => {
             <ul className="list-main">
                 {topItem.length > 0 ? (
                     topItem.map((item, idx) => (
-                        <li className="border-2 min-h-60 rounded-md" key={idx}>
-                            <div className="h-3/4">
-                                <Image className="rounded-t max-h-44" src={item.img} alt="Clothing" width={800} height={500} />
+                        <li className="shadow min-h-72 rounded-md cursor-pointer" key={idx}>
+                            <div className="mb-1.5">
+                                <Image
+                                    className="rounded-t max-h-56 min-h-56 object-fill"
+                                    src={item.img}
+                                    alt="Clothing"
+                                    width={800}
+                                    height={500}
+                                />
                             </div>
-                            <div className="flex justify-between">
-                                <div>
-                                    <div className="pl-2 pt-px h-1/4">
-                                        <p>{item.name}</p>
-                                    </div>
-                                    <div className="flex px-2 pt-3.5">
-                                        <span className="mr-2 text-sm">SIZE:</span>
-                                        {item.size.slice(0, 3).map((s, idx) => (
-                                            <span className="mr-2 text-sm" key={idx}>
-                                                {s}
-                                            </span>
-                                        ))}
+                            <div className="flex">
+                                <div className="w-full text-center">
+                                    <div className="pt-px">
+                                        <p className="text-sm font-serif">{item.name}</p>
                                     </div>
                                 </div>
-                                <div className="flex pr-2 pt-2">
+                            </div>
+                            <div className="flex justify-center items-center mb-2">
+                                <div className="h-3 text-base font-serif">
+                                    <p>{addComma(item.price)} 원</p>
+                                </div>
+                            </div>
+                            <div className="flex justify-center mb-8">
+                                <div className="flex h-3 mt-2">
                                     {item.color.map((c, idx) => (
-                                        <div className={`w-3 border max-h-3 ${colorVariants[c]}`} key={idx}></div>
+                                        <div className={`w-3 max-h-1 mr-1 ${colorVariants[c]}`} key={idx}></div>
                                     ))}
                                 </div>
+                            </div>
+                            <div className="flex relative">
+                                {item.goodsDate.slice(0, 7) === moment().format("YYYY-MM") ? (
+                                    <img className="newIcon" src="/icons/product_new_icon.svg" alt="NEW" />
+                                ) : item.status === "best" ? (
+                                    <img className="bestIcon" src="/icons/product_best_icon.gif" alt="BEST" />
+                                ) : null}
                             </div>
                         </li>
                     ))
@@ -65,7 +83,7 @@ const TopPage: React.FC<TopPageProps> = () => {
                 )}
             </ul>
             <div className="banner-main my-5 mr-5">
-                <div className="banner border-2 rounded-md">
+                <div className="banner rounded-md shadow">
                     <div>
                         <Image className="rounded-t" src="/images/banner1.webp" alt="BANNER" width={800} height={500} />
                     </div>

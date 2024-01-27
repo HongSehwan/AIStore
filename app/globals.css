@@ -81,6 +81,18 @@ body {
             width: 100%;
         }
     }
+    .newIcon {
+        position: absolute;
+        width: 32px;
+        left: 124.5px;
+        bottom: 4px;
+    }
+    .bestIcon {
+        position: absolute;
+        width: 56px;
+        left: 112px;
+        bottom: -9px;
+    }
     .banner-main-home {
         width: 12rem;
         @media (max-width: 768px) {
