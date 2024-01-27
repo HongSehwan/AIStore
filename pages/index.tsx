@@ -1,7 +1,8 @@
 import Image from "next/image";
 import storeItem, { ClothingItem } from "@/data/dummy";
 import Carousel from "@/components/Carousel";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import moment from "moment";
 
 interface StartPageProps {
     // Add any necessary props
@@ -23,6 +24,18 @@ const colorVariants: { [key: string]: string } = {
 };
 
 const StartPage: React.FC<StartPageProps> = () => {
+    const [month, setMonth] = useState<string>("");
+
+    useEffect(() => {
+        setMonth(moment().format("YYYY-MM"));
+        console.log(moment().format("YYYY-MM"));
+    }, []);
+
+    const addComma = (price: number) => {
+        let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return returnString;
+    };
+
     return (
         <>
             <Carousel />
@@ -30,25 +43,37 @@ const StartPage: React.FC<StartPageProps> = () => {
                 <ul className="list-main">
                     {storeItem.length > 0 ? (
                         storeItem.map((item: ClothingItem, idx: number) => (
-                            <li className="border-2 min-h-60 rounded-md" key={idx}>
-                                <div className="h-3/4">
-                                    <Image className="rounded-t max-h-44" src={item.img} alt="Clothing" width={800} height={500} />
+                            <li className="shadow min-h-72 rounded-md" key={idx}>
+                                <div className="mb-px">
+                                    <Image
+                                        className="rounded-t max-h-56 min-h-56 object-fill"
+                                        src={item.img}
+                                        alt="Clothing"
+                                        width={800}
+                                        height={500}
+                                    />
+                                    <div className="flex relative">
+                                        {item.goodsDate.slice(0, 7) === moment().format("YYYY-MM") ? (
+                                            <img className="absolute w-8 right-1.5 bottom-3" src="/icons/product_new_icon.svg" alt="NEW" />
+                                        ) : item.status === "best" ? (
+                                            <img className="absolute w-14 right-1 bottom-0" src="/icons/product_best_icon.gif" alt="BEST" />
+                                        ) : null}
+                                    </div>
                                 </div>
-                                <div className="flex justify-between">
-                                    <div>
-                                        <div className="pl-2 pt-px h-1/4">
-                                            <p>{item.name}</p>
-                                        </div>
-                                        <div className="flex px-2 pt-3.5">
-                                            <span className="mr-2 text-sm">SIZE:</span>
-                                            {item.size.slice(0, 3).map((s, idx) => (
-                                                <span className="mr-2 text-sm" key={idx}>
-                                                    {s}
-                                                </span>
-                                            ))}
+                                <div className="flex">
+                                    <div className="w-full text-center">
+                                        <div className="pt-px">
+                                            <p className="text-sm font-serif">{item.name}</p>
                                         </div>
                                     </div>
-                                    <div className="flex pr-2 pt-2">
+                                </div>
+                                <div className="flex justify-center items-center mb-2">
+                                    <div className="h-3 text-base font-serif">
+                                        <p>{addComma(item.price)} 원</p>
+                                    </div>
+                                </div>
+                                <div className="flex justify-center mb-2">
+                                    <div className="flex h-3 mt-2">
                                         {item.color.map((c, idx) => (
                                             <div className={`w-3 border max-h-3 ${colorVariants[c]}`} key={idx}></div>
                                         ))}
@@ -61,7 +86,7 @@ const StartPage: React.FC<StartPageProps> = () => {
                     )}
                 </ul>
                 <div className="banner-main-home my-5 mr-5">
-                    <div className="banner-home border-2 rounded-md">
+                    <div className="banner-home rounded-md shadow">
                         <div>
                             <Image className="rounded-t" src="/images/banner1.webp" alt="BANNER" width={800} height={500} />
                         </div>

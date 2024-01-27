@@ -67,7 +67,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                     {width >= 680 ? (
                         <div className="w-96 flex items-center">
                             <Nav.Item>
-                                <Nav.Link className="text-[#000] font-normal" href="/">
+                                <Nav.Link className="text-[#000] font-normal" href="/best">
                                     BEST
                                 </Nav.Link>
                             </Nav.Item>
@@ -136,8 +136,8 @@ const NavBar: React.FC<NavBarProps> = () => {
                     )}
                 </div>
             </Nav>
-            <div className="sideMenu" ref={targetRef}>
-                <h1>TOP</h1>
+            <div className="sideMenu border-2 border-gray-400 bg-gray-400 rounded-lg" ref={targetRef}>
+                <h1 className="flex items-center justify-center h-full text-gray-50 font-semibold">TOP</h1>
             </div>
         </>
     );

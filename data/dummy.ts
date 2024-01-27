@@ -5,6 +5,9 @@ export interface ClothingItem {
     gender: string[];
     color: string[];
     img: string;
+    status: string;
+    goodsDate: string;
+    price: number;
 }
 
 const storeItem: ClothingItem[] = [
@@ -15,6 +18,9 @@ const storeItem: ClothingItem[] = [
         gender: ["female"],
         color: ["cyan", "gray", "pink", "red", "white"],
         img: "/images/clothing1.webp",
+        status: "best",
+        goodsDate: "2023-12-26",
+        price: 25000,
     },
     {
         type: "top",
@@ -23,6 +29,9 @@ const storeItem: ClothingItem[] = [
         gender: ["male", "female"],
         color: ["amber", "stone", "emerald", "gray", "indigo", "orange", "pink", "white"],
         img: "/images/clothing2.webp",
+        status: "best",
+        goodsDate: "2023-11-30",
+        price: 15000,
     },
     {
         type: "top",
@@ -31,6 +40,9 @@ const storeItem: ClothingItem[] = [
         gender: ["male"],
         color: ["stone", "gray", "white"],
         img: "/images/clothing3.webp",
+        status: "general",
+        goodsDate: "2023-12-31",
+        price: 12000,
     },
     {
         type: "top",
@@ -39,6 +51,9 @@ const storeItem: ClothingItem[] = [
         gender: ["female"],
         color: ["amber", "orange"],
         img: "/images/clothing4.webp",
+        status: "new",
+        goodsDate: "2024-01-20",
+        price: 45000,
     },
     {
         type: "top",
@@ -47,6 +62,9 @@ const storeItem: ClothingItem[] = [
         gender: ["male"],
         color: ["white"],
         img: "/images/clothing5.webp",
+        status: "general",
+        goodsDate: "2023-12-02",
+        price: 35000,
     },
     {
         type: "top",
@@ -55,6 +73,9 @@ const storeItem: ClothingItem[] = [
         gender: ["female"],
         color: ["white"],
         img: "/images/clothing6.webp",
+        status: "general",
+        goodsDate: "2023-12-26",
+        price: 10000,
     },
     {
         type: "pants",
@@ -63,6 +84,9 @@ const storeItem: ClothingItem[] = [
         gender: ["male"],
         color: ["indigo"],
         img: "/images/pants1.webp",
+        status: "general",
+        goodsDate: "2023-12-12",
+        price: 30000,
     },
     {
         type: "pants",
@@ -71,6 +95,9 @@ const storeItem: ClothingItem[] = [
         gender: ["female"],
         color: ["amber"],
         img: "/images/pants2.webp",
+        status: "best",
+        goodsDate: "2023-12-31",
+        price: 30000,
     },
     {
         type: "pants",
@@ -79,6 +106,9 @@ const storeItem: ClothingItem[] = [
         gender: ["female"],
         color: ["sky"],
         img: "/images/pants3.webp",
+        status: "new",
+        goodsDate: "2024-01-24",
+        price: 25000,
     },
     {
         type: "pants",
@@ -87,6 +117,9 @@ const storeItem: ClothingItem[] = [
         gender: ["female"],
         color: ["red"],
         img: "/images/pants4.webp",
+        status: "general",
+        goodsDate: "2023-12-02",
+        price: 25000,
     },
     {
         type: "shoes",
@@ -95,6 +128,9 @@ const storeItem: ClothingItem[] = [
         gender: ["male"],
         color: ["stone"],
         img: "/images/shoes1.webp",
+        status: "general",
+        goodsDate: "2023-12-26",
+        price: 30000,
     },
     {
         type: "shoes",
@@ -103,6 +139,9 @@ const storeItem: ClothingItem[] = [
         gender: ["male"],
         color: ["white"],
         img: "/images/shoes2.webp",
+        status: "best",
+        goodsDate: "2023-12-28",
+        price: 25000,
     },
     {
         type: "shoes",
@@ -111,6 +150,9 @@ const storeItem: ClothingItem[] = [
         gender: ["female"],
         color: ["stone"],
         img: "/images/shoes3.webp",
+        status: "best",
+        goodsDate: "2023-12-31",
+        price: 35000,
     },
     {
         type: "shoes",
@@ -119,6 +161,9 @@ const storeItem: ClothingItem[] = [
         gender: ["male"],
         color: ["blue"],
         img: "/images/shoes4.webp",
+        status: "general",
+        goodsDate: "2023-12-26",
+        price: 30000,
     },
     {
         type: "shoes",
@@ -127,6 +172,9 @@ const storeItem: ClothingItem[] = [
         gender: ["male", "female"],
         color: ["white"],
         img: "/images/shoes5.webp",
+        status: "new",
+        goodsDate: "2023-01-20",
+        price: 50000,
     },
     {
         type: "outerwear",
@@ -135,6 +183,9 @@ const storeItem: ClothingItem[] = [
         gender: ["female"],
         color: ["orange"],
         img: "/images/outerwear1.webp",
+        status: "best",
+        goodsDate: "2023-12-31",
+        price: 70000,
     },
     {
         type: "outerwear",
@@ -143,6 +194,9 @@ const storeItem: ClothingItem[] = [
         gender: ["male"],
         color: ["sky"],
         img: "/images/outerwear2.webp",
+        status: "general",
+        goodsDate: "2023-12-26",
+        price: 45000,
     },
     {
         type: "outerwear",
@@ -151,6 +205,9 @@ const storeItem: ClothingItem[] = [
         gender: ["female"],
         color: ["orange"],
         img: "/images/outerwear3.webp",
+        status: "new",
+        goodsDate: "2024-01-24",
+        price: 50000,
     },
     {
         type: "outerwear",
@@ -159,6 +216,9 @@ const storeItem: ClothingItem[] = [
         gender: ["female"],
         color: ["amber"],
         img: "/images/outerwear4.webp",
+        status: "best",
+        goodsDate: "2023-12-31",
+        price: 85000,
     },
     {
         type: "outerwear",
@@ -167,6 +227,9 @@ const storeItem: ClothingItem[] = [
         gender: ["male", "female"],
         color: ["blue"],
         img: "/images/outerwear5.webp",
+        status: "best",
+        goodsDate: "2023-12-26",
+        price: 129000,
     },
 ];
 
