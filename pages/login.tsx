@@ -1,11 +1,14 @@
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import * as CryptoJS from "crypto-js";
+import { useRouter } from "next/router";
 
 interface LoginPageProps {
     // Add any props if needed
 }
 
 const LoginPage: React.FC = () => {
+    const router = useRouter();
     const [id, setId] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [login, setLogin] = useState<boolean>(false);
@@ -26,7 +29,7 @@ const LoginPage: React.FC = () => {
     };
 
     const checkId = (id: string) => {
-        if (/^([0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(id)) {
+        if (/^[A-Za-z]{1}[A-Za-z0-9]{4,15}$/.test(id)) {
             return true;
         }
         return false;
@@ -67,22 +70,38 @@ const LoginPage: React.FC = () => {
     }, [id, password]);
 
     const handleLogin = () => {
-        let userInfo = { id: id, password: password };
-        if (window.localStorage.getItem(id) === null) {
-            window.localStorage.setItem(id, JSON.stringify(userInfo));
-            setLogin(true);
-        } else if (JSON.parse(window.localStorage.getItem(id) || "").id === id) {
-            if (JSON.parse(window.localStorage.getItem(id) || "").password === password) {
-                setLogin(true);
+        if (id && password) {
+            let bytes = CryptoJS.AES.decrypt(
+                JSON.parse(window.localStorage.getItem(id) || "").password,
+                process.env.NEXT_PUBLIC_SECRET_KEY
+            );
+            let originalText = bytes.toString(CryptoJS.enc.Utf8);
+            if (window.localStorage.getItem(id) === null) {
+                setLogin(false);
+                alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
+            } else if (JSON.parse(window.localStorage.getItem(id) || "").id === id) {
+                if (password === originalText) {
+                    setLogin(true);
+                    alert("로그인에 성공했습니다.");
+                    router.push("/");
+                } else {
+                    setLogin(false);
+                    setIdValidation(true);
+                    setPwValidation(true);
+                    alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+                }
             } else {
+                setLogin(false);
                 setIdValidation(true);
                 setPwValidation(true);
+                alert("아이디 또는 비밀번호가 일치하지 않습니다.");
             }
         } else {
-            setIdValidation(true);
-            setPwValidation(true);
+            setLogin(false);
+            alert("아이디와 비밀번호 항목은 필수 입력값입니다.");
         }
     };
+
     return (
         <div className="flex justify-center text-center">
             <div>
@@ -90,6 +109,10 @@ const LoginPage: React.FC = () => {
                     <Image className="login-logo w-56 mt-5" src="/images/AIStoreLogo.webp" alt="LOGO" width={800} height={500} />
                 </div>
                 <div className="w-96 mt-6">
+                    {/* 
+                        1. 카카오/구글 소셜 로그인
+                        추가
+                    */}
                     <input
                         className="loginInput"
                         style={

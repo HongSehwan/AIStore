@@ -394,6 +394,19 @@ body {
         }
     }
 
+    .joinInput {
+        padding-left: 10px;
+        width: 360px;
+        height: 35px;
+        border-radius: 3px;
+        &:focus {
+            outline: none;
+        }
+        @media (width <= 400px) {
+            width: 250px;
+        }
+    }
+
     .pwInput {
         padding-left: 10px;
         margin-top: 15px;
@@ -420,6 +433,24 @@ body {
     }
 
     .loginBtnText {
+        margin: 8px auto;
+        color: white;
+        font-size: medium;
+        font-weight: 800;
+    }
+
+    .joinBtn {
+        margin-top: 20px;
+        width: 360px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        @media (width <= 400px) {
+            width: 250px;
+        }
+    }
+
+    .joinBtnText {
         margin: 8px auto;
         color: white;
         font-size: medium;
