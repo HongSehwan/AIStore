@@ -1,6 +1,6 @@
 import Image from "next/image";
 import storeItem, { ClothingItem } from "@/data/dummy";
-import Carousel from "@/components/Carousel";
+import Carousel from "@/components/carousel";
 import moment from "moment";
 
 interface StartPageProps {
