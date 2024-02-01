@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
 import Image from "next/image";
 import * as CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
+import { loginChanged, logoutChanged, userIdState, userPwState } from "@/store/recoil_atoms";
 
 interface LoginPageProps {
     // Add any props if needed
@@ -11,7 +13,10 @@ const LoginPage: React.FC = () => {
     const router = useRouter();
     const [id, setId] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [login, setLogin] = useState<boolean>(false);
+    const [storeId, setStoreId] = useRecoilState<string>(userIdState);
+    const [storePW, setStorePW] = useRecoilState<string>(userPwState);
+    const setLoginAtom = useSetRecoilState<boolean>(loginChanged);
+    const setLogoutAtom = useSetRecoilState<boolean>(logoutChanged);
     const [idValidation, setIdValidation] = useState<boolean>(false);
     const [pwValidation, setPwValidation] = useState<boolean>(false);
     const [btnValidation, setBtnValidation] = useState<boolean>(false);
@@ -71,33 +76,32 @@ const LoginPage: React.FC = () => {
 
     const handleLogin = () => {
         if (id && password) {
-            let bytes = CryptoJS.AES.decrypt(
-                JSON.parse(window.localStorage.getItem(id) || "").password,
-                process.env.NEXT_PUBLIC_SECRET_KEY
-            );
+            console.log(storeId);
+            console.log(storePW);
+            let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
             let originalText = bytes.toString(CryptoJS.enc.Utf8);
-            if (window.localStorage.getItem(id) === null) {
-                setLogin(false);
+            if (storeId === "" || storePW === "") {
+                setLogoutAtom(() => false);
                 alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
-            } else if (JSON.parse(window.localStorage.getItem(id) || "").id === id) {
+            } else if (storeId === id) {
                 if (password === originalText) {
-                    setLogin(true);
+                    setLoginAtom(() => true);
                     alert("로그인에 성공했습니다.");
                     router.push("/");
                 } else {
-                    setLogin(false);
+                    setLogoutAtom(() => false);
                     setIdValidation(true);
                     setPwValidation(true);
                     alert("아이디 또는 비밀번호가 일치하지 않습니다.");
                 }
             } else {
-                setLogin(false);
+                setLogoutAtom(() => false);
                 setIdValidation(true);
                 setPwValidation(true);
                 alert("아이디 또는 비밀번호가 일치하지 않습니다.");
             }
         } else {
-            setLogin(false);
+            setLogoutAtom(() => false);
             alert("아이디와 비밀번호 항목은 필수 입력값입니다.");
         }
     };

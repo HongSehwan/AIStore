@@ -31,7 +31,7 @@ const NewPage: React.FC = () => {
     };
 
     useEffect(() => {
-        let newProduct = storeItem.filter((item) => item.goodsDate.slice(0, 7) === moment().format("YYYY-MM"));
+        let newProduct = storeItem.filter((item) => item.status === "new");
         setNewItem(newProduct);
     }, []);
 

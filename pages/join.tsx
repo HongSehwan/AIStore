@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import { userIdState, userPwState } from "@/store/recoil_atoms";
 import Image from "next/image";
 import * as CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
@@ -11,13 +13,15 @@ const JoinPage: React.FC = () => {
     const router = useRouter();
     const [id, setId] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [storeId, setStoreId] = useRecoilState<string>(userIdState);
+    const [storePW, setStorePW] = useRecoilState<string>(userPwState);
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [join, setJoin] = useState<boolean>(false);
     const [idValidation, setIdValidation] = useState<boolean>(true);
     const [pwValidation, setPwValidation] = useState<boolean>(true);
     const [confirmPwValidation, setConfirmPwValidation] = useState<boolean>(true);
     const [btnValidation, setBtnValidation] = useState<boolean>(false);
-    const idInput = useRef<any>(null);
+    const idInput = useRef<any>("");
 
     const onChangeValue = (event) => {
         const {
@@ -95,9 +99,8 @@ const JoinPage: React.FC = () => {
 
     const handleJoin = () => {
         const encrypted = CryptoJS.AES.encrypt(password, process.env.NEXT_PUBLIC_SECRET_KEY).toString();
-        let userInfo = { id: id, password: encrypted };
         if (id && password && confirmPassword) {
-            if (window.localStorage.getItem(id)) {
+            if (storeId === id) {
                 setJoin(false);
                 alert("중복된 아이디가 존재합니다.");
             } else if (!checkId(id)) {
@@ -107,7 +110,8 @@ const JoinPage: React.FC = () => {
                 setJoin(false);
                 alert("비밀번호는 항목은 영문(대소문자)/숫자/특수기호 포함 최소 8자입니다.");
             } else {
-                window.localStorage.setItem(id, JSON.stringify(userInfo));
+                setStoreId(id);
+                setStorePW(encrypted);
                 setJoin(true);
                 router.push("/login");
                 alert("회원가입에 성공했습니다.");

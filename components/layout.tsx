@@ -1,8 +1,11 @@
 import React, { ReactNode } from "react";
+import { RecoilRoot, RecoilEnv } from "recoil";
 import "../app/globals.css";
 import "tailwindcss/tailwind.css";
 import NavBar from "./navbar";
 import Footer from "./footer";
+
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 interface LayoutProps {
     children: ReactNode;
@@ -10,19 +13,21 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
-        <div>
-            <nav>
-                <NavBar />
-            </nav>
-
+        <RecoilRoot>
             <div>
-                <main>{children}</main>
-            </div>
+                <nav>
+                    <NavBar />
+                </nav>
 
-            <footer>
-                <Footer />
-            </footer>
-        </div>
+                <div>
+                    <main>{children}</main>
+                </div>
+
+                <footer>
+                    <Footer />
+                </footer>
+            </div>
+        </RecoilRoot>
     );
 };
 

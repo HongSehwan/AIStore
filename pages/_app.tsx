@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "@/components/layout";
+import { sql } from "@vercel/postgres";
 
 interface MyAppProps {
     Component: React.ComponentType<any>;
@@ -7,7 +8,7 @@ interface MyAppProps {
 }
 
 export default function MyApp({ Component, pageProps }: MyAppProps) {
-    const [isClient, setIsClient] = useState(false);
+    const [isClient, setIsClient] = useState<boolean>(false);
 
     useEffect(() => {
         setIsClient(true);

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import storeItem, { ClothingItem } from "@/data/dummy";
 import Carousel from "@/components/carousel";
-import moment from "moment";
+// import moment from "moment";
 
 interface StartPageProps {
     // Add any necessary props
@@ -72,7 +72,7 @@ const StartPage: React.FC<StartPageProps> = () => {
                                     </div>
                                 </div>
                                 <div className="flex relative">
-                                    {item.goodsDate.slice(0, 7) === moment().format("YYYY-MM") ? (
+                                    {item.status === "new" ? (
                                         <img className="newIcon" src="/icons/product_new_icon.svg" alt="NEW" />
                                     ) : item.status === "best" ? (
                                         <img className="bestIcon" src="/icons/product_best_icon.gif" alt="BEST" />
