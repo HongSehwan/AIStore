@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import Image from "next/image";
 import * as CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
@@ -76,8 +76,6 @@ const LoginPage: React.FC = () => {
 
     const handleLogin = () => {
         if (id && password) {
-            console.log(storeId);
-            console.log(storePW);
             let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
             let originalText = bytes.toString(CryptoJS.enc.Utf8);
             if (storeId === "" || storePW === "") {
@@ -105,18 +103,20 @@ const LoginPage: React.FC = () => {
             alert("아이디와 비밀번호 항목은 필수 입력값입니다.");
         }
     };
+    {
+        /* 
+                        1. 카카오/구글 소셜 로그인
+                        추가
+                    */
+    }
 
     return (
         <div className="flex justify-center text-center">
-            <div>
+            {/* <div>
                 <div className="flex justify-center">
                     <Image className="login-logo w-56 mt-5" src="/images/AIStoreLogo.webp" alt="LOGO" width={800} height={500} />
                 </div>
                 <div className="w-96 mt-6">
-                    {/* 
-                        1. 카카오/구글 소셜 로그인
-                        추가
-                    */}
                     <input
                         className="loginInput"
                         style={
@@ -154,7 +154,7 @@ const LoginPage: React.FC = () => {
                         <p className="loginBtnText">로그인</p>
                     </button>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
