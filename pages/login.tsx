@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic";
+
 import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import Image from "next/image";
-import * as CryptoJS from "crypto-js";
+import CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
 import { loginChanged, logoutChanged, userIdState, userPwState } from "@/store/recoil_atoms";
 
@@ -76,8 +78,8 @@ const LoginPage: React.FC = () => {
 
     const handleLogin = () => {
         if (id && password) {
-            let bytes = CryptoJS?.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
-            let originalText = bytes?.toString(CryptoJS.enc.Utf8);
+            let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
+            let originalText = bytes.toString(CryptoJS.enc.Utf8);
             if (storeId === "" || storePW === "") {
                 setLogoutAtom(() => false);
                 alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
@@ -103,12 +105,9 @@ const LoginPage: React.FC = () => {
             alert("아이디와 비밀번호 항목은 필수 입력값입니다.");
         }
     };
-    {
-        /* 
-                        1. 카카오/구글 소셜 로그인
-                        추가
-                    */
-    }
+    /* 
+        1. 카카오/구글 소셜 로그인 추가
+    */
 
     return (
         <div className="flex justify-center text-center">
