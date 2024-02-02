@@ -22,16 +22,16 @@ const LoginPage: React.FC = () => {
     const [btnValidation, setBtnValidation] = useState<boolean>(false);
     const idInput = useRef<any>(null);
 
-    // const onChangeValue = (event) => {
-    //     const {
-    //         target: { name, value },
-    //     } = event;
-    //     if (name === "id") {
-    //         setId(value);
-    //     } else if (name === "password") {
-    //         setPassword(value);
-    //     }
-    // };
+    const onChangeValue = (event) => {
+        const {
+            target: { name, value },
+        } = event;
+        if (name === "id") {
+            setId(value);
+        } else if (name === "password") {
+            setPassword(value);
+        }
+    };
 
     // const checkId = (id: string) => {
     //     if (/^[A-Za-z]{1}[A-Za-z0-9]{4,15}$/.test(id)) {
@@ -112,7 +112,7 @@ const LoginPage: React.FC = () => {
 
     return (
         <div className="flex justify-center text-center">
-            {/* <div>
+            <div>
                 <div className="flex justify-center">
                     <Image className="login-logo w-56 mt-5" src="/images/AIStoreLogo.webp" alt="LOGO" width={800} height={500} />
                 </div>
@@ -149,12 +149,12 @@ const LoginPage: React.FC = () => {
                     <button
                         className="loginBtn"
                         style={btnValidation ? { backgroundColor: "#4bcffa" } : { backgroundColor: "#c7ecee" }}
-                        onClick={handleLogin}
+                        // onClick={handleLogin}
                     >
                         <p className="loginBtnText">로그인</p>
                     </button>
                 </div>
-            </div> */}
+            </div>
         </div>
     );
 };
