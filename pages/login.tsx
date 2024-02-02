@@ -47,32 +47,32 @@ const LoginPage: React.FC = () => {
         return false;
     };
 
-    useEffect(() => {
-        if (idInput) {
-            idInput.current.focus();
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (idInput) {
+    //         idInput.current.focus();
+    //     }
+    // }, []);
 
-    useEffect(() => {
-        if (!checkId(id)) {
-            setIdValidation(true);
-        }
-        if (!checkPassword(password)) {
-            setPwValidation(true);
-        }
-        if (checkId(id)) {
-            setIdValidation(false);
-        }
-        if (checkPassword(password)) {
-            setPwValidation(false);
-        }
-        if (!checkId(id) || !checkPassword(password)) {
-            setBtnValidation(false);
-        }
-        if (checkId(id) && checkPassword(password)) {
-            setBtnValidation(true);
-        }
-    }, [id, password]);
+    // useEffect(() => {
+    //     if (!checkId(id)) {
+    //         setIdValidation(true);
+    //     }
+    //     if (!checkPassword(password)) {
+    //         setPwValidation(true);
+    //     }
+    //     if (checkId(id)) {
+    //         setIdValidation(false);
+    //     }
+    //     if (checkPassword(password)) {
+    //         setPwValidation(false);
+    //     }
+    //     if (!checkId(id) || !checkPassword(password)) {
+    //         setBtnValidation(false);
+    //     }
+    //     if (checkId(id) && checkPassword(password)) {
+    //         setBtnValidation(true);
+    //     }
+    // }, [id, password]);
 
     const handleLogin = () => {
         if (id && password) {
@@ -112,7 +112,7 @@ const LoginPage: React.FC = () => {
 
     return (
         <div className="flex justify-center text-center">
-            {/* <div>
+            <div>
                 <div className="flex justify-center">
                     <Image className="login-logo w-56 mt-5" src="/images/AIStoreLogo.webp" alt="LOGO" width={800} height={500} />
                 </div>
@@ -154,7 +154,7 @@ const LoginPage: React.FC = () => {
                         <p className="loginBtnText">로그인</p>
                     </button>
                 </div>
-            </div> */}
+            </div>
         </div>
     );
 };
