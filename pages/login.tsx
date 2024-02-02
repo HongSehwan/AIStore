@@ -74,35 +74,35 @@ const LoginPage: React.FC = () => {
     //     }
     // }, [id, password]);
 
-    // const handleLogin = () => {
-    //     if (id && password) {
-    //         let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
-    //         let originalText = bytes.toString(CryptoJS.enc.Utf8);
-    //         if (storeId === "" || storePW === "") {
-    //             setLogoutAtom(() => false);
-    //             alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
-    //         } else if (storeId === id) {
-    //             if (password === originalText) {
-    //                 setLoginAtom(() => true);
-    //                 alert("로그인에 성공했습니다.");
-    //                 router.push("/");
-    //             } else {
-    //                 setLogoutAtom(() => false);
-    //                 setIdValidation(true);
-    //                 setPwValidation(true);
-    //                 alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-    //             }
-    //         } else {
-    //             setLogoutAtom(() => false);
-    //             setIdValidation(true);
-    //             setPwValidation(true);
-    //             alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-    //         }
-    //     } else {
-    //         setLogoutAtom(() => false);
-    //         alert("아이디와 비밀번호 항목은 필수 입력값입니다.");
-    //     }
-    // };
+    const handleLogin = () => {
+        if (id && password) {
+            let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
+            let originalText = bytes.toString(CryptoJS.enc.Utf8);
+            if (storeId === "" || storePW === "") {
+                setLogoutAtom(() => false);
+                alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
+            } else if (storeId === id) {
+                if (password === originalText) {
+                    setLoginAtom(() => true);
+                    alert("로그인에 성공했습니다.");
+                    router.push("/");
+                } else {
+                    setLogoutAtom(() => false);
+                    setIdValidation(true);
+                    setPwValidation(true);
+                    alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+                }
+            } else {
+                setLogoutAtom(() => false);
+                setIdValidation(true);
+                setPwValidation(true);
+                alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+            }
+        } else {
+            setLogoutAtom(() => false);
+            alert("아이디와 비밀번호 항목은 필수 입력값입니다.");
+        }
+    };
     {
         /* 
                         1. 카카오/구글 소셜 로그인
@@ -149,7 +149,7 @@ const LoginPage: React.FC = () => {
                     <button
                         className="loginBtn"
                         style={btnValidation ? { backgroundColor: "#4bcffa" } : { backgroundColor: "#c7ecee" }}
-                        // onClick={handleLogin}
+                        onClick={handleLogin}
                     >
                         <p className="loginBtnText">로그인</p>
                     </button>
