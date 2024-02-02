@@ -10,17 +10,17 @@ interface LoginPageProps {
 }
 
 const LoginPage: React.FC = () => {
-    // const router = useRouter();
-    // const [id, setId] = useState<string>("");
-    // const [password, setPassword] = useState<string>("");
-    // const [storeId, setStoreId] = useRecoilState<string>(userIdState);
-    // const [storePW, setStorePW] = useRecoilState<string>(userPwState);
-    // const setLoginAtom = useSetRecoilState<boolean>(loginChanged);
-    // const setLogoutAtom = useSetRecoilState<boolean>(logoutChanged);
-    // const [idValidation, setIdValidation] = useState<boolean>(false);
-    // const [pwValidation, setPwValidation] = useState<boolean>(false);
-    // const [btnValidation, setBtnValidation] = useState<boolean>(false);
-    // const idInput = useRef<any>(null);
+    const router = useRouter();
+    const [id, setId] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [storeId, setStoreId] = useRecoilState<string>(userIdState);
+    const [storePW, setStorePW] = useRecoilState<string>(userPwState);
+    const setLoginAtom = useSetRecoilState<boolean>(loginChanged);
+    const setLogoutAtom = useSetRecoilState<boolean>(logoutChanged);
+    const [idValidation, setIdValidation] = useState<boolean>(false);
+    const [pwValidation, setPwValidation] = useState<boolean>(false);
+    const [btnValidation, setBtnValidation] = useState<boolean>(false);
+    const idInput = useRef<any>(null);
 
     // const onChangeValue = (event) => {
     //     const {
