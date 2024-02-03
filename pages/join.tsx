@@ -98,7 +98,6 @@ const JoinPage: React.FC = () => {
     }, [id, password, confirmPassword]);
 
     const handleJoin = () => {
-        const encrypted = CryptoJS.AES.encrypt(password, process.env.NEXT_PUBLIC_SECRET_KEY).toString();
         if (id && password && confirmPassword) {
             if (storeId === id) {
                 setJoin(false);
@@ -110,6 +109,7 @@ const JoinPage: React.FC = () => {
                 setJoin(false);
                 alert("비밀번호는 항목은 영문(대소문자)/숫자/특수기호 포함 최소 8자입니다.");
             } else {
+                const encrypted = CryptoJS.AES.encrypt(password, process.env.NEXT_PUBLIC_SECRET_KEY).toString();
                 setStoreId(id);
                 setStorePW(encrypted);
                 setJoin(true);

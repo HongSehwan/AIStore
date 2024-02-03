@@ -33,63 +33,56 @@ const LoginPage: React.FC = () => {
         }
     };
 
-    // const checkId = (id: string) => {
-    //     if (/^[A-Za-z]{1}[A-Za-z0-9]{4,15}$/.test(id)) {
-    //         return true;
-    //     }
-    //     return false;
-    // };
+    const checkId = (id: string) => {
+        if (/^[A-Za-z]{1}[A-Za-z0-9]{4,15}$/.test(id)) {
+            return true;
+        }
+        return false;
+    };
 
-    // const checkPassword = (password: string) => {
-    //     if (/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
-    //         return true;
-    //     }
-    //     return false;
-    // };
+    const checkPassword = (password: string) => {
+        if (/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
+            return true;
+        }
+        return false;
+    };
 
-    // useEffect(() => {
-    //     if (idInput) {
-    //         idInput.current.focus();
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (idInput) {
+            idInput.current.focus();
+        }
+    }, []);
 
-    // useEffect(() => {
-    //     if (!checkId(id)) {
-    //         setIdValidation(true);
-    //     }
-    //     if (!checkPassword(password)) {
-    //         setPwValidation(true);
-    //     }
-    //     if (checkId(id)) {
-    //         setIdValidation(false);
-    //     }
-    //     if (checkPassword(password)) {
-    //         setPwValidation(false);
-    //     }
-    //     if (!checkId(id) || !checkPassword(password)) {
-    //         setBtnValidation(false);
-    //     }
-    //     if (checkId(id) && checkPassword(password)) {
-    //         setBtnValidation(true);
-    //     }
-    // }, [id, password]);
+    useEffect(() => {
+        if (!checkId(id)) {
+            setIdValidation(true);
+        }
+        if (!checkPassword(password)) {
+            setPwValidation(true);
+        }
+        if (checkId(id)) {
+            setIdValidation(false);
+        }
+        if (checkPassword(password)) {
+            setPwValidation(false);
+        }
+        if (!checkId(id) || !checkPassword(password)) {
+            setBtnValidation(false);
+        }
+        if (checkId(id) && checkPassword(password)) {
+            setBtnValidation(true);
+        }
+    }, [id, password]);
 
     const handleLogin = () => {
         if (id && password) {
-            console.log(storePW);
-            console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
-            // console.log(CryptoJS);
-            // console.log(CryptoJS.AES);
-            // let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
-            // console.log(bytes);
-            // let originalText = bytes.toString(CryptoJS.enc.Utf8);
-            // console.log(originalText);
             if (storeId === "" || storePW === "") {
                 setLogoutAtom(() => false);
                 alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
             } else if (storeId === id) {
-                // if (password === originalText) {
-                if (password) {
+                let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
+                let originalText = bytes.toString(CryptoJS.enc.Utf8);
+                if (password === originalText) {
                     setLoginAtom(() => true);
                     alert("로그인에 성공했습니다.");
                     router.push("/");
