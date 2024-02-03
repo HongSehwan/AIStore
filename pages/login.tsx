@@ -4,6 +4,7 @@ import Image from "next/image";
 // import * as CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
 import { loginChanged, logoutChanged, userIdState, userPwState } from "@/store/recoil_atoms";
+var CryptoJS = require("crypto-js");
 
 interface LoginPageProps {
     // Add any props if needed
@@ -76,14 +77,13 @@ const LoginPage: React.FC = () => {
 
     const handleLogin = () => {
         if (id && password) {
-            // let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
-            // let originalText = bytes.toString(CryptoJS.enc.Utf8);
+            let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
+            let originalText = bytes.toString(CryptoJS.enc.Utf8);
             if (storeId === "" || storePW === "") {
                 setLogoutAtom(() => false);
                 alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
             } else if (storeId === id) {
-                // if (password === originalText) {
-                if (password) {
+                if (password === originalText) {
                     setLoginAtom(() => true);
                     alert("로그인에 성공했습니다.");
                     router.push("/");
