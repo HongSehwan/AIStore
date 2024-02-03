@@ -80,15 +80,16 @@ const LoginPage: React.FC = () => {
             console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
             console.log(CryptoJS);
             console.log(CryptoJS.AES);
-            let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
-            console.log(bytes);
-            let originalText = bytes.toString(CryptoJS.enc.Utf8);
-            console.log(originalText);
+            // let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
+            // console.log(bytes);
+            // let originalText = bytes.toString(CryptoJS.enc.Utf8);
+            // console.log(originalText);
             if (storeId === "" || storePW === "") {
                 setLogoutAtom(() => false);
                 alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
             } else if (storeId === id) {
-                if (password === originalText) {
+                // if (password === originalText) {
+                if (password) {
                     setLoginAtom(() => true);
                     alert("로그인에 성공했습니다.");
                     router.push("/");
