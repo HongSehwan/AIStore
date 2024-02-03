@@ -79,7 +79,8 @@ const LoginPage: React.FC = () => {
             if (storeId === "" || storePW === "") {
                 setLogoutAtom(() => false);
                 alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
-            } else if (storeId === id) {
+            } else if (storeId === id && CryptoJS) {
+                console.log(CryptoJS);
                 let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
                 let originalText = bytes.toString(CryptoJS.enc.Utf8);
                 if (password === originalText) {
