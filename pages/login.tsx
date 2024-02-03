@@ -78,7 +78,7 @@ const LoginPage: React.FC = () => {
         if (id && password) {
             console.log(storePW);
             console.log(process.env.NEXT_PUBLIC_SECRET_KEY);
-            console.log(CryptoJS);
+            // console.log(CryptoJS);
             // console.log(CryptoJS.AES);
             // let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
             // console.log(bytes);
