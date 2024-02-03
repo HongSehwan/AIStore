@@ -394,8 +394,57 @@ body {
         }
     }
 
+    .nameInput {
+        padding-left: 10px;
+        margin-top: 5px;
+        width: 360px;
+        height: 35px;
+        border: 1px solid #b2bec3;
+        border-radius: 3px;
+        &:focus {
+            outline: none;
+        }
+        @media (width <= 400px) {
+            width: 250px;
+        }
+    }
+
+    .joinInputWrapper {
+        width: 360px;
+        height: 35px;
+        margin-left: 12px;
+        margin-top: 7.7px;
+        @media (width <= 400px) {
+            width: 250px;
+            margin-left: 67px;
+        }
+    }
+
     .joinInput {
         padding-left: 10px;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .duplicationCheck {
+        width: 60px;
+        font-size: 15px;
+        color: white;
+        border: 1px solid #b2bec3;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        background-color: #b2bec3;
+        @media (width <= 400px) {
+            font-size: 10px;
+        }
+    }
+
+    .pwInput {
+        padding-left: 10px;
+        margin-top: 7.7px;
         width: 360px;
         height: 35px;
         border-radius: 3px;
@@ -407,11 +456,129 @@ body {
         }
     }
 
-    .pwInput {
-        padding-left: 10px;
-        margin-top: 15px;
+    .addressInputWrapper {
         width: 360px;
         height: 35px;
+        margin-left: 12px;
+        margin-top: 5px;
+        @media (width <= 400px) {
+            width: 250px;
+            margin-left: 67px;
+        }
+    }
+
+    #zipCodeInput {
+        margin-right: 10px;
+        padding-left: 10px;
+        width: 100px;
+        height: 35px;
+        border: 1px solid #b2bec3;
+        border-radius: 3px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .addressSearch {
+        width: 60px;
+        font-size: 15px;
+        color: white;
+        border: 1px solid #b2bec3;
+        border-radius: 3px;
+        background-color: #b2bec3;
+        @media (width <= 400px) {
+            font-size: 10px;
+        }
+    }
+
+    #addressInput {
+        padding-left: 10px;
+        width: 360px;
+        height: 35px;
+        margin-top: 5px;
+        border: 1px solid #b2bec3;
+        border-radius: 3px;
+        &:focus {
+            outline: none;
+        }
+        @media (width <= 400px) {
+            width: 250px;
+        }
+    }
+
+    #addressDetailInput {
+        padding-left: 10px;
+        width: 360px;
+        height: 35px;
+        margin-top: 5px;
+        border: 1px solid #b2bec3;
+        border-radius: 3px;
+        &:focus {
+            outline: none;
+        }
+        @media (width <= 400px) {
+            width: 250px;
+        }
+    }
+
+    .phoneWrapper {
+        margin-top: 5px;
+    }
+
+    .areaCode {
+        margin-left: 12px;
+        padding-left: 10px;
+        width: 75px;
+        height: 35px;
+        border: 1px solid #b2bec3;
+        border-radius: 3px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .enDash {
+        display: flex;
+        margin: 0 5px 0 5px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .phoneInput {
+        padding-left: 10px;
+        width: 75px;
+        height: 35px;
+        border: 1px solid #b2bec3;
+        border-radius: 3px;
+        &:focus {
+            outline: none;
+        }
+        @media (width <= 400px) {
+            width: 250px;
+        }
+    }
+
+    .telCheck {
+        margin-left: 8px;
+        width: 90px;
+        font-size: 15px;
+        color: white;
+        border: 1px solid #b2bec3;
+        border-radius: 3px;
+        background-color: #b2bec3;
+        @media (width <= 400px) {
+            font-size: 10px;
+        }
+    }
+
+    .emailInput {
+        padding-left: 10px;
+        margin-top: 5px;
+        width: 360px;
+        height: 35px;
+        border: 1px solid #b2bec3;
         border-radius: 3px;
         &:focus {
             outline: none;
