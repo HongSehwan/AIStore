@@ -46,9 +46,6 @@ const NavBar: React.FC<NavBarProps> = () => {
     };
 
     useEffect(() => {
-        console.log(id);
-        console.log(password);
-        console.log(loginStatus);
         window.addEventListener("resize", handleResize);
         window.addEventListener("scroll", handleScroll);
         if (window.scrollY > 200 && targetRef) {
