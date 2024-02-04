@@ -114,6 +114,10 @@ const LoginPage: React.FC = () => {
                     <Image className="login-logo w-56 mt-5" src="/images/AIStoreLogo.webp" alt="LOGO" width={800} height={500} />
                 </div>
                 <div className="w-96 mt-6">
+                    {/*
+                        1. 카카오/구글 소셜 로그인
+                        추가
+                    */}
                     <input
                         className="loginInput"
                         style={

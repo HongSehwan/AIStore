@@ -33,9 +33,13 @@ const JoinPage: React.FC = () => {
     const [storePW, setStorePW] = useRecoilState<string>(userPwState);
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [join, setJoin] = useState<boolean>(false);
+    const [idDuplication, setIdDuplication] = useState<boolean>(false);
+    const [nameValidation, setNameValidation] = useState<boolean>(true);
     const [idValidation, setIdValidation] = useState<boolean>(true);
     const [pwValidation, setPwValidation] = useState<boolean>(true);
     const [confirmPwValidation, setConfirmPwValidation] = useState<boolean>(true);
+    const [addressValidation, setAddressValidation] = useState<boolean>(true);
+    const [emailValidation, setEmailValidation] = useState<boolean>(true);
     const [btnValidation, setBtnValidation] = useState<boolean>(false);
     const idInput = useRef<any>("");
 
@@ -45,6 +49,7 @@ const JoinPage: React.FC = () => {
         } = event;
         if (name === "id") {
             setId(value);
+            setIdDuplication(false);
         } else if (name === "password") {
             setPassword(value);
         } else if (name === "confirmPassword") {
@@ -68,8 +73,15 @@ const JoinPage: React.FC = () => {
         }
     };
 
+    const checkName = (nameText: string) => {
+        if (/^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣 ]*$/.test(nameText)) {
+            return true;
+        }
+        return false;
+    };
+
     const checkId = (id: string) => {
-        if (/^[A-Za-z]{1}[A-Za-z0-9]{4,15}$/.test(id)) {
+        if (/^[a-z]{1}[a-z0-9]{4,15}$/.test(id)) {
             return true;
         }
         return false;
@@ -91,6 +103,29 @@ const JoinPage: React.FC = () => {
         return false;
     };
 
+    const checkTelNum = (firstNumber: string, middleNumber: string, lastNumber: string) => {
+        if (/\d{3}-\d{3,4}-\d{4}/.test(`${Number(firstNumber)}-${Number(middleNumber)}-${Number(lastNumber)}`)) {
+            return true;
+        }
+        return false;
+    };
+
+    const checkAddress = (addrDetail: string) => {
+        if (/^[ㄱ-ㅎ가-힣0-9\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\" ]*$/.test(addrDetail)) {
+            if (address && zipCode && addrDetail) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    const checkEmail = (email: string) => {
+        if (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(email)) {
+            return true;
+        }
+        return false;
+    };
+
     useEffect(() => {
         if (idInput) {
             idInput.current.focus();
@@ -103,6 +138,9 @@ const JoinPage: React.FC = () => {
             pwValidation가 true면 PW 유효성 검사 미충족
             confirmPwValidation true면 CONFIRM PW 유효성 검사 미충족
         */
+        if (!checkName(nameText)) {
+            setNameValidation(true);
+        }
         if (!checkId(id)) {
             setIdValidation(true);
         }
@@ -111,6 +149,15 @@ const JoinPage: React.FC = () => {
         }
         if (!checkConfirmPassword(confirmPassword)) {
             setConfirmPwValidation(true);
+        }
+        if (!checkAddress(addrDetail)) {
+            setAddressValidation(true);
+        }
+        if (!checkEmail(email)) {
+            setEmailValidation(true);
+        }
+        if (checkName(nameText)) {
+            setNameValidation(false);
         }
         if (checkId(id)) {
             setIdValidation(false);
@@ -121,13 +168,35 @@ const JoinPage: React.FC = () => {
         if (checkConfirmPassword(confirmPassword)) {
             setConfirmPwValidation(false);
         }
-        if (!checkId(id) || !checkPassword(password) || !checkConfirmPassword(confirmPassword)) {
+        if (checkAddress(addrDetail)) {
+            setAddressValidation(false);
+        }
+        if (checkEmail(email)) {
+            setEmailValidation(false);
+        }
+        if (
+            !checkName(nameText) ||
+            !checkId(id) ||
+            !idDuplication ||
+            !checkPassword(password) ||
+            !checkConfirmPassword(confirmPassword) ||
+            !checkAddress(addrDetail) ||
+            !checkEmail(email)
+        ) {
             setBtnValidation(false);
         }
-        if (checkId(id) && checkPassword(password) && checkConfirmPassword(confirmPassword)) {
+        if (
+            checkName(nameText) &&
+            checkId(id) &&
+            idDuplication &&
+            checkPassword(password) &&
+            checkConfirmPassword(confirmPassword) &&
+            checkAddress(addrDetail) &&
+            checkEmail(email)
+        ) {
             setBtnValidation(true);
         }
-    }, [id, password, confirmPassword]);
+    }, [id, nameText, password, confirmPassword, addrDetail, email]);
 
     const handleJoin = () => {
         if (
@@ -143,15 +212,18 @@ const JoinPage: React.FC = () => {
             lastNumber &&
             email
         ) {
-            if (storeId === id) {
+            if (!checkName(nameText)) {
                 setJoin(false);
-                alert("중복된 아이디가 존재합니다.");
-            } else if (!checkId(id)) {
-                setJoin(false);
-                alert("아이디는 영문, 숫자 포함 최대 15자입니다.");
+                alert("입력하신 이름을 사용할 수 없습니다.");
             } else if (!checkPassword(password)) {
                 setJoin(false);
                 alert("영문(대소문자), 숫자, 특수문자를 혼합하여 입력해주세요.");
+            } else if (!checkEmail(email)) {
+                setJoin(false);
+                alert("올바른 이메일 형식이 아닙니다.");
+            } else if (!checkTelNum(firstNumber, middleNumber, lastNumber)) {
+                setJoin(false);
+                alert("휴대폰 번호는 숫자만 입력 가능합니다.");
             } else {
                 const encrypted = CryptoJS.AES.encrypt(password, process.env.NEXT_PUBLIC_SECRET_KEY).toString();
                 setStoreId(id);
@@ -167,7 +239,40 @@ const JoinPage: React.FC = () => {
     };
 
     const checkIdHandler = () => {
-        alert("ID 중복 확인 완료");
+        if (id === "") {
+            setJoin(false);
+            setIdDuplication(false);
+            setBtnValidation(false);
+            alert("아이디는 필수 입력값입니다.");
+        } else if (/^[0-9]+$/.test(id[0])) {
+            setJoin(false);
+            setIdDuplication(false);
+            setBtnValidation(false);
+            alert("아이디는 영문으로 시작해야 합니다.");
+        } else if (storeId === id) {
+            setJoin(false);
+            setIdDuplication(false);
+            setBtnValidation(false);
+            alert("중복된 아이디가 존재합니다.");
+        } else if (!checkId(id)) {
+            setJoin(false);
+            setIdValidation(true);
+            setBtnValidation(false);
+            alert("아이디는 영문(소문자)/숫자 5-15자입니다.");
+        } else {
+            setIdDuplication(true);
+            setIdValidation(false);
+            alert("ID 중복 확인 완료");
+            if (
+                checkName(nameText) &&
+                checkPassword(password) &&
+                checkConfirmPassword(confirmPassword) &&
+                checkAddress(addrDetail) &&
+                checkEmail(email)
+            ) {
+                setBtnValidation(true);
+            }
+        }
         /*
             DB 생성 후 로직 완성하기
         */
@@ -194,20 +299,21 @@ const JoinPage: React.FC = () => {
                     </div>
                     <div>
                         {/*
-                        1. ID 중복검사 버튼
-                        2. 주소
-                        3. 핸드폰 번호(인증 번호 확인)
-                        4. 이메일(이메일 형식 검사 정규표현식 추가)
-                        5. 이용약관 동의 및 14세 이상 동의
-                        6. 카카오/구글 소셜 로그인
-                        추가
-                    */}
+                            1. 핸드폰 번호(인증 번호 확인)
+                            2. 이용약관 동의 및 14세 이상 동의
+                            추가
+                        */}
                         <div className="flex">
                             <div className="w-96 mt-6">
                                 <div>
                                     <p className="text-sm font-medium text-left ml-3.5 mt-3">이름</p>
                                     <input
                                         className="nameInput"
+                                        style={
+                                            nameValidation
+                                                ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
+                                                : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
+                                        }
                                         name="nameText"
                                         type="name"
                                         ref={idInput}
@@ -223,15 +329,15 @@ const JoinPage: React.FC = () => {
                                         <input
                                             className="joinInput"
                                             style={
-                                                idValidation
+                                                !idValidation && idDuplication
                                                     ? {
-                                                          borderColor: "#b2bec3",
+                                                          borderColor: "#74b9ff",
                                                           borderStyle: "solid",
                                                           borderWidth: "1px",
                                                           width: "300px",
                                                       }
                                                     : {
-                                                          borderColor: "#74b9ff",
+                                                          borderColor: "#b2bec3",
                                                           borderStyle: "solid",
                                                           borderWidth: "1px",
                                                           width: "300px",
@@ -290,6 +396,11 @@ const JoinPage: React.FC = () => {
                                     <div className="addressInputWrapper flex">
                                         <input
                                             id="zipCodeInput"
+                                            style={
+                                                addressValidation
+                                                    ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
+                                                    : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
+                                            }
                                             type="text"
                                             name="zipCode"
                                             placeholder="우편번호"
@@ -304,15 +415,26 @@ const JoinPage: React.FC = () => {
                                     </div>
                                     <input
                                         id="addressInput"
+                                        style={
+                                            addressValidation
+                                                ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
+                                                : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
+                                        }
                                         name="address"
                                         type="text"
                                         placeholder="도로명 주소를 입력해주세요."
                                         value={address}
+                                        readOnly
                                         required
                                         onChange={onChangeValue}
                                     />
                                     <input
                                         id="addressDetailInput"
+                                        style={
+                                            addressValidation
+                                                ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
+                                                : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
+                                        }
                                         name="addressDetail"
                                         type="text"
                                         placeholder="상세 주소를 입력해주세요."
@@ -357,9 +479,15 @@ const JoinPage: React.FC = () => {
                                     <p className="text-sm font-medium text-left ml-3.5 mt-3">이메일</p>
                                     <input
                                         className="emailInput"
+                                        style={
+                                            emailValidation
+                                                ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
+                                                : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
+                                        }
                                         name="email"
                                         type="email"
                                         value={email}
+                                        placeholder="이메일을 입력해주세요."
                                         required
                                         onChange={onChangeValue}
                                     />

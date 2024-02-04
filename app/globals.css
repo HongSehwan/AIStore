@@ -399,7 +399,6 @@ body {
         margin-top: 5px;
         width: 360px;
         height: 35px;
-        border: 1px solid #b2bec3;
         border-radius: 3px;
         &:focus {
             outline: none;
@@ -472,7 +471,6 @@ body {
         padding-left: 10px;
         width: 100px;
         height: 35px;
-        border: 1px solid #b2bec3;
         border-radius: 3px;
 
         &:focus {
@@ -497,7 +495,6 @@ body {
         width: 360px;
         height: 35px;
         margin-top: 5px;
-        border: 1px solid #b2bec3;
         border-radius: 3px;
         &:focus {
             outline: none;
@@ -512,7 +509,6 @@ body {
         width: 360px;
         height: 35px;
         margin-top: 5px;
-        border: 1px solid #b2bec3;
         border-radius: 3px;
         &:focus {
             outline: none;
@@ -578,7 +574,6 @@ body {
         margin-top: 5px;
         width: 360px;
         height: 35px;
-        border: 1px solid #b2bec3;
         border-radius: 3px;
         &:focus {
             outline: none;
