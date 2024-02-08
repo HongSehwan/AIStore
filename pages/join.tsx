@@ -303,7 +303,7 @@ const JoinPage: React.FC = () => {
                             2. 이용약관 동의 및 14세 이상 동의
                             추가
                         */}
-                        <div className="flex">
+                        <div className="joinContainer">
                             <div className="w-96 mt-6">
                                 <div>
                                     <p className="text-sm font-medium text-left ml-3.5 mt-3">이름</p>
@@ -454,7 +454,7 @@ const JoinPage: React.FC = () => {
                                             <option value="018">018</option>
                                             <option value="019">019</option>
                                         </select>
-                                        <p className="enDash">–</p>
+                                        <span className="enDash">–</span>
                                         <input
                                             className="phoneInput"
                                             name="middleNum"
@@ -463,7 +463,7 @@ const JoinPage: React.FC = () => {
                                             required
                                             onChange={onChangeValue}
                                         />
-                                        <p className="enDash">–</p>
+                                        <span className="enDash">–</span>
                                         <input
                                             className="phoneInput"
                                             name="lastNum"
@@ -472,7 +472,7 @@ const JoinPage: React.FC = () => {
                                             required
                                             onChange={onChangeValue}
                                         />
-                                        <button className="telCheck">인증번호 받기</button>
+                                        <button className="phoneNumCheck">인증번호 받기</button>
                                     </div>
                                 </div>
                                 <div>
