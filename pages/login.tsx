@@ -4,6 +4,7 @@ import Image from "next/image";
 import * as CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
 import { loginChanged, logoutChanged, userIdState, userPwState } from "@/store/recoil_atoms";
+import Footer from "../components/footer";
 
 interface LoginPageProps {
     // Add any props if needed
@@ -108,55 +109,60 @@ const LoginPage: React.FC = () => {
     */
 
     return (
-        <div className="flex justify-center text-center">
-            <div>
-                <div className="flex justify-center">
-                    <Image className="login-logo w-56 mt-5" src="/images/AIStoreLogo.webp" alt="LOGO" width={800} height={500} />
-                </div>
-                <div className="w-96 mt-6">
-                    {/*
+        <>
+            <div className="loginWrapper flex justify-center text-center">
+                <div>
+                    <div className="flex justify-center">
+                        <Image className="login-logo w-56 mt-5" src="/images/AIStoreLogo.webp" alt="LOGO" width={800} height={500} />
+                    </div>
+                    <div className="w-96 mt-6">
+                        {/*
                         1. 카카오/구글 소셜 로그인
                         추가
                     */}
-                    <input
-                        className="loginInput"
-                        style={
-                            idValidation
-                                ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
-                                : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
-                        }
-                        ref={idInput}
-                        type="text"
-                        name="id"
-                        placeholder="아이디를 입력해주세요."
-                        value={id}
-                        required
-                        onChange={onChangeValue}
-                    />
-                    <input
-                        className="pwInput"
-                        style={
-                            pwValidation
-                                ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
-                                : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
-                        }
-                        name="password"
-                        type="password"
-                        placeholder="비밀번호를 입력해주세요."
-                        value={password}
-                        required
-                        onChange={onChangeValue}
-                    />
-                    <button
-                        className="loginBtn"
-                        style={btnValidation ? { backgroundColor: "#4bcffa" } : { backgroundColor: "#c7ecee" }}
-                        onClick={handleLogin}
-                    >
-                        <p className="loginBtnText">로그인</p>
-                    </button>
+                        <input
+                            className="loginInput"
+                            style={
+                                idValidation
+                                    ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
+                                    : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
+                            }
+                            ref={idInput}
+                            type="text"
+                            name="id"
+                            placeholder="아이디를 입력해주세요."
+                            value={id}
+                            required
+                            onChange={onChangeValue}
+                        />
+                        <input
+                            className="pwInput"
+                            style={
+                                pwValidation
+                                    ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
+                                    : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
+                            }
+                            name="password"
+                            type="password"
+                            placeholder="비밀번호를 입력해주세요."
+                            value={password}
+                            required
+                            onChange={onChangeValue}
+                        />
+                        <button
+                            className="loginBtn"
+                            style={btnValidation ? { backgroundColor: "#4bcffa" } : { backgroundColor: "#c7ecee" }}
+                            onClick={handleLogin}
+                        >
+                            <p className="loginBtnText">로그인</p>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+            <footer className="authFooter">
+                <Footer />
+            </footer>
+        </>
     );
 };
 

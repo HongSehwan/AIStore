@@ -5,6 +5,7 @@ import Image from "next/image";
 import Script from "next/script";
 import * as CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
+import Footer from "../components/footer";
 
 declare global {
     interface Window {
@@ -292,7 +293,7 @@ const JoinPage: React.FC = () => {
     return (
         <>
             <Script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></Script>
-            <div className="flex justify-center text-center">
+            <div className="joinWrapper flex justify-center text-center">
                 <div>
                     <div className="flex justify-center">
                         <Image className="login-logo w-56 mt-5" src="/images/AIStoreLogo.webp" alt="LOGO" width={800} height={500} />
@@ -304,9 +305,9 @@ const JoinPage: React.FC = () => {
                             추가
                         */}
                         <div className="joinContainer">
-                            <div className="w-96 mt-6">
+                            <div className="joinLayout">
                                 <div>
-                                    <p className="text-sm font-medium text-left ml-3.5 mt-3">이름</p>
+                                    <p className="text-sm font-medium text-left ml-1 mt-3">이름</p>
                                     <input
                                         className="nameInput"
                                         style={
@@ -324,7 +325,7 @@ const JoinPage: React.FC = () => {
                                     />
                                 </div>
                                 <div>
-                                    <p className="text-sm font-medium text-left ml-3.5 mt-3">아이디</p>
+                                    <p className="text-sm font-medium text-left ml-1 mt-3">아이디</p>
                                     <div className="joinInputWrapper flex">
                                         <input
                                             className="joinInput"
@@ -356,7 +357,7 @@ const JoinPage: React.FC = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <p className="text-sm font-medium text-left ml-3.5 mt-3">비밀번호</p>
+                                    <p className="text-sm font-medium text-left ml-1 mt-3">비밀번호</p>
                                     <input
                                         className="pwInput"
                                         style={
@@ -373,7 +374,7 @@ const JoinPage: React.FC = () => {
                                     />
                                 </div>
                                 <div>
-                                    <p className="text-sm font-medium text-left ml-3.5 mt-3">비밀번호 확인</p>
+                                    <p className="text-sm font-medium text-left ml-1 mt-3">비밀번호 확인</p>
                                     <input
                                         className="pwInput"
                                         style={
@@ -390,10 +391,10 @@ const JoinPage: React.FC = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="w-96 mt-6">
+                            <div>
                                 <div>
-                                    <p className="text-sm font-medium text-left ml-3.5 mt-3">주소</p>
-                                    <div className="addressInputWrapper flex">
+                                    <p className="text-sm font-medium text-left ml-1 mt-3">주소</p>
+                                    <div className="zipCodeInputWrapper flex">
                                         <input
                                             id="zipCodeInput"
                                             style={
@@ -413,38 +414,40 @@ const JoinPage: React.FC = () => {
                                             우편번호
                                         </button>
                                     </div>
-                                    <input
-                                        id="addressInput"
-                                        style={
-                                            addressValidation
-                                                ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
-                                                : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
-                                        }
-                                        name="address"
-                                        type="text"
-                                        placeholder="도로명 주소를 입력해주세요."
-                                        value={address}
-                                        readOnly
-                                        required
-                                        onChange={onChangeValue}
-                                    />
-                                    <input
-                                        id="addressDetailInput"
-                                        style={
-                                            addressValidation
-                                                ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
-                                                : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
-                                        }
-                                        name="addressDetail"
-                                        type="text"
-                                        placeholder="상세 주소를 입력해주세요."
-                                        value={addrDetail}
-                                        required
-                                        onChange={onChangeValue}
-                                    />
+                                    <div className="addressInputWrapper">
+                                        <input
+                                            id="addressInput"
+                                            style={
+                                                addressValidation
+                                                    ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
+                                                    : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
+                                            }
+                                            name="address"
+                                            type="text"
+                                            placeholder="도로명 주소를 입력해주세요."
+                                            value={address}
+                                            readOnly
+                                            required
+                                            onChange={onChangeValue}
+                                        />
+                                        <input
+                                            id="addressDetailInput"
+                                            style={
+                                                addressValidation
+                                                    ? { borderColor: "#b2bec3", borderStyle: "solid", borderWidth: "1px" }
+                                                    : { borderColor: "#74b9ff", borderStyle: "solid", borderWidth: "1px" }
+                                            }
+                                            name="addressDetail"
+                                            type="text"
+                                            placeholder="상세 주소를 입력해주세요."
+                                            value={addrDetail}
+                                            required
+                                            onChange={onChangeValue}
+                                        />
+                                    </div>
                                 </div>
                                 <div>
-                                    <p className="text-sm font-medium text-left ml-3.5 mt-3">휴대전화</p>
+                                    <p className="text-sm font-medium text-left ml-1 mt-3">휴대전화</p>
                                     <div className="phoneWrapper flex">
                                         <select className="areaCode" name="firstNum" onChange={onChangeValue}>
                                             <option value="010">010</option>
@@ -476,7 +479,7 @@ const JoinPage: React.FC = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <p className="text-sm font-medium text-left ml-3.5 mt-3">이메일</p>
+                                    <p className="text-sm font-medium text-left ml-1 mt-3">이메일</p>
                                     <input
                                         className="emailInput"
                                         style={
@@ -506,6 +509,9 @@ const JoinPage: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <footer className="authFooter">
+                <Footer />
+            </footer>
         </>
     );
 };

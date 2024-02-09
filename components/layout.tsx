@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { useRouter } from "next/router";
 import { RecoilRoot, RecoilEnv } from "recoil";
 import "../app/globals.css";
 import "tailwindcss/tailwind.css";
@@ -12,6 +13,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+    const router = useRouter();
     return (
         <RecoilRoot>
             <div>
@@ -23,9 +25,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     <main>{children}</main>
                 </div>
 
-                <footer>
-                    <Footer />
-                </footer>
+                {router.asPath === "/join" || router.asPath === "/login" ? null : (
+                    <footer>
+                        <Footer />
+                    </footer>
+                )}
             </div>
         </RecoilRoot>
     );

@@ -69,6 +69,12 @@ body {
         width: 100%;
         bottom: 0;
     }
+    .authFooter {
+        width: 24rem;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
     .list-main {
         list-style: none;
         display: grid;
@@ -381,6 +387,13 @@ body {
         }
     }
 
+    .loginWrapper {
+        width: auto;
+        @media (width <= 400px) {
+            width: 24rem;
+        }
+    }
+
     .loginInput {
         padding-left: 10px;
         width: 360px;
@@ -391,6 +404,13 @@ body {
         }
         @media (width <= 400px) {
             width: 250px;
+        }
+    }
+
+    .joinWrapper {
+        width: auto;
+        @media (width <= 400px) {
+            width: 24rem;
         }
     }
 
@@ -417,19 +437,25 @@ body {
         & p {
             @media (width <= 400px) {
                 width: 250px;
-                margin-left: 67px;
+                margin-left: 57px;
             }
+        }
+    }
+
+    .joinLayout {
+        margin-right: 50px;
+        @media (width <= 768px) {
+            margin-right: 0;
         }
     }
 
     .joinInputWrapper {
         width: 360px;
         height: 35px;
-        margin-left: 12px;
         margin-top: 7.7px;
         @media (width <= 400px) {
             width: 250px;
-            margin-left: 67px;
+            margin-left: 55px;
         }
     }
 
@@ -439,6 +465,9 @@ body {
         border-bottom-left-radius: 3px;
         &:focus {
             outline: none;
+        }
+        @media (width <= 400px) {
+            width: 250px;
         }
     }
 
@@ -469,15 +498,19 @@ body {
         }
     }
 
-    .addressInputWrapper {
+    .zipCodeInputWrapper {
         width: 360px;
         height: 35px;
-        margin-left: 12px;
         margin-top: 5px;
         @media (width <= 400px) {
             width: 250px;
-            margin-left: 67px;
+            margin-left: 55px;
         }
+    }
+
+    .addressInputWrapper {
+        width: 360px;
+        //margin-left: 0.875rem;
     }
 
     #zipCodeInput {
@@ -538,7 +571,7 @@ body {
     }
 
     .areaCode {
-        margin-left: 1.5px;
+        //margin-left: 1.5px;
         padding-left: 10px;
         width: 75px;
         height: 35px;
@@ -549,7 +582,7 @@ body {
             outline: none;
         }
         @media (width <= 400px) {
-            margin-left: 0;
+            //margin-left: 0;
             width: 55px;
         }
     }
