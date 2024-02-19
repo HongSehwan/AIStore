@@ -6,6 +6,7 @@ import Script from "next/script";
 import * as CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
 import Footer from "../components/footer";
+import axios from "axios";
 
 declare global {
     interface Window {
@@ -31,7 +32,6 @@ const JoinPage: React.FC = () => {
     const [lastNumber, setLastNumber] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [storeId, setStoreId] = useRecoilState<string>(userIdState);
-    const [storePW, setStorePW] = useRecoilState<string>(userPwState);
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [join, setJoin] = useState<boolean>(false);
     const [idDuplication, setIdDuplication] = useState<boolean>(false);
@@ -105,7 +105,7 @@ const JoinPage: React.FC = () => {
     };
 
     const checkTelNum = (firstNumber: string, middleNumber: string, lastNumber: string) => {
-        if (/\d{3}-\d{3,4}-\d{4}/.test(`${Number(firstNumber)}-${Number(middleNumber)}-${Number(lastNumber)}`)) {
+        if (/^\d{3}-\d{3,4}-\d{4}$/.test(`${firstNumber}-${middleNumber}-${lastNumber}`)) {
             return true;
         }
         return false;
@@ -224,14 +224,26 @@ const JoinPage: React.FC = () => {
                 alert("올바른 이메일 형식이 아닙니다.");
             } else if (!checkTelNum(firstNumber, middleNumber, lastNumber)) {
                 setJoin(false);
-                alert("휴대폰 번호는 숫자만 입력 가능합니다.");
+                alert("휴대폰 번호가 잘못되었습니다.");
             } else {
-                const encrypted = CryptoJS.AES.encrypt(password, process.env.NEXT_PUBLIC_SECRET_KEY).toString();
-                setStoreId(id);
-                setStorePW(encrypted);
-                setJoin(true);
-                router.push("/login");
-                alert("회원가입에 성공했습니다.");
+                const userInfo = {
+                    name: nameText,
+                    userid: id,
+                    password: password,
+                    zipcode: zipCode,
+                    address: `${address} ${addrDetail}`,
+                    phone: `${firstNumber}${middleNumber}${lastNumber}`,
+                    email: email,
+                };
+                if (userInfo.userid !== "" || userInfo.userid !== null || userInfo.userid !== undefined) {
+                    axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`, userInfo, {
+                        headers: { "Content-Type": `application/json` },
+                    });
+                    setStoreId(id);
+                    setJoin(true);
+                    router.push("/login");
+                    alert("회원가입에 성공했습니다.");
+                }
             }
         } else {
             setJoin(false);
@@ -250,29 +262,38 @@ const JoinPage: React.FC = () => {
             setIdDuplication(false);
             setBtnValidation(false);
             alert("아이디는 영문으로 시작해야 합니다.");
-        } else if (storeId === id) {
-            setJoin(false);
-            setIdDuplication(false);
-            setBtnValidation(false);
-            alert("중복된 아이디가 존재합니다.");
         } else if (!checkId(id)) {
             setJoin(false);
             setIdValidation(true);
             setBtnValidation(false);
             alert("아이디는 영문(소문자)/숫자 5-15자입니다.");
         } else {
-            setIdDuplication(true);
-            setIdValidation(false);
-            alert("ID 중복 확인 완료");
-            if (
-                checkName(nameText) &&
-                checkPassword(password) &&
-                checkConfirmPassword(confirmPassword) &&
-                checkAddress(addrDetail) &&
-                checkEmail(email)
-            ) {
-                setBtnValidation(true);
-            }
+            axios
+                .get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users?userid=${id}`, {
+                    headers: { "Content-Type": `application/json` },
+                })
+                .then((res) => {
+                    console.log(res);
+                    if (res.data.text === "duplication") {
+                        setJoin(false);
+                        setIdDuplication(false);
+                        setBtnValidation(false);
+                        alert("중복된 아이디가 존재합니다.");
+                    } else {
+                        setIdDuplication(true);
+                        setIdValidation(false);
+                        alert("사용 가능한 아이디입니다.");
+                        if (
+                            checkName(nameText) &&
+                            checkPassword(password) &&
+                            checkConfirmPassword(confirmPassword) &&
+                            checkAddress(addrDetail) &&
+                            checkEmail(email)
+                        ) {
+                            setBtnValidation(true);
+                        }
+                    }
+                });
         }
         /*
             DB 생성 후 로직 완성하기
@@ -475,7 +496,12 @@ const JoinPage: React.FC = () => {
                                             required
                                             onChange={onChangeValue}
                                         />
-                                        <button className="phoneNumCheck">인증번호 받기</button>
+                                        <button
+                                            className="phoneNumCheck"
+                                            onClick={() => alert("서비스 준비 중입니다. 번호 입력 후 계속 진행하십시오.")}
+                                        >
+                                            인증번호 받기
+                                        </button>
                                     </div>
                                 </div>
                                 <div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "@/components/layout";
+import { SessionProvider } from "next-auth/react";
 import { sql } from "@vercel/postgres";
 
 interface MyAppProps {
@@ -7,7 +8,7 @@ interface MyAppProps {
     pageProps: any;
 }
 
-export default function MyApp({ Component, pageProps }: MyAppProps) {
+export default function MyApp({ Component, pageProps: { session, ...pageProps } }: MyAppProps) {
     const [isClient, setIsClient] = useState<boolean>(false);
 
     useEffect(() => {
@@ -25,11 +26,13 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
 
     return (
         isClient && (
-            <Layout>
-                <div className="main-container">
-                    <Component {...pageProps} />
-                </div>
-            </Layout>
+            <SessionProvider>
+                <Layout>
+                    <div className="main-container">
+                        <Component {...pageProps} />
+                    </div>
+                </Layout>
+            </SessionProvider>
         )
     );
 }

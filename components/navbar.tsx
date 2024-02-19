@@ -2,6 +2,7 @@ import "tailwindcss/tailwind.css";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
 import { loginState, loginChanged, logoutChanged, userIdState, userPwState } from "@/store/recoil_atoms";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import Nav from "react-bootstrap/Nav";
 import Image from "next/image";
@@ -135,7 +136,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                                 <>
                                     <div className="ml-10"></div>
                                     <Nav.Item className="ml-6">
-                                        <Nav.Link className="text-[#000] font-light" onClick={handleLogout}>
+                                        <Nav.Link className="text-[#000] font-light" onClick={() => signOut()}>
                                             LOGOUT
                                         </Nav.Link>
                                     </Nav.Item>
