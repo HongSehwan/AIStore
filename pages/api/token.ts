@@ -1,10 +1,5 @@
 import jwt from "jsonwebtoken";
 
-export function signJWT(payload: object, expiresIn: string | number) {
-    // payload와 secret key, expire time을 인자로 넣어 jwt 토큰 생성
-    return jwt.sign(payload, process.env.NEXT_PUBLIC_SECRET_KEY, { algorithm: "RS256", expiresIn });
-}
-
 export function verifyJWT(token: string) {
     try {
         // 인자로 받은 token이 유효한지 확인하는 변수 (유효하다면 decoded가 존재)

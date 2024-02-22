@@ -5,6 +5,7 @@ import * as CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
 import { loginChanged, logoutChanged, userIdState, userPwState } from "@/store/recoil_atoms";
 import Footer from "../components/footer";
+import axios from "axios";
 
 interface LoginPageProps {
     // Add any props if needed
@@ -76,29 +77,42 @@ const LoginPage: React.FC = () => {
     }, [id, password]);
 
     const handleLogin = () => {
+        const userInfo = {
+            userid: id,
+            password: password,
+        };
         if (id && password) {
-            if (storeId === "" || storePW === "") {
-                setLogoutAtom(() => false);
-                alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
-            } else if (storeId === id) {
-                let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
-                let originalText = bytes.toString(CryptoJS.enc.Utf8);
-                if (password === originalText) {
-                    setLoginAtom(() => true);
-                    alert("로그인에 성공했습니다.");
-                    router.push("/");
-                } else {
-                    setLogoutAtom(() => false);
-                    setIdValidation(true);
-                    setPwValidation(true);
-                    alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-                }
-            } else {
-                setLogoutAtom(() => false);
-                setIdValidation(true);
-                setPwValidation(true);
-                alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-            }
+            axios
+                .post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`, userInfo, {
+                    headers: { "Content-Type": `application/json` },
+                })
+                .then((res) => {
+                    if (res) {
+                        console.log(res);
+                        // if (storeId === "" || storePW === "") {
+                        //     setLogoutAtom(() => false);
+                        //     alert("회원정보가 없습니다. 회원가입 후 이용바랍니다.");
+                        // } else if (storeId === id) {
+                        //     let bytes = CryptoJS.AES.decrypt(storePW, process.env.NEXT_PUBLIC_SECRET_KEY);
+                        //     let originalText = bytes.toString(CryptoJS.enc.Utf8);
+                        //     if (password === originalText) {
+                        //         setLoginAtom(() => true);
+                        //         alert("로그인에 성공했습니다.");
+                        //         router.push("/");
+                        //     } else {
+                        //         setLogoutAtom(() => false);
+                        //         setIdValidation(true);
+                        //         setPwValidation(true);
+                        //         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+                        //     }
+                        // } else {
+                        //     setLogoutAtom(() => false);
+                        //     setIdValidation(true);
+                        //     setPwValidation(true);
+                        //     alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+                        // }
+                    }
+                });
         } else {
             setLogoutAtom(() => false);
             alert("아이디와 비밀번호 항목은 필수 입력값입니다.");

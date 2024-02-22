@@ -3,7 +3,6 @@ import { useRecoilState } from "recoil";
 import { userIdState, userPwState } from "@/store/recoil_atoms";
 import Image from "next/image";
 import Script from "next/script";
-import * as CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
 import Footer from "../components/footer";
 import axios from "axios";
