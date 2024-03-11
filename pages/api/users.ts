@@ -1,27 +1,22 @@
 import { sql } from "@vercel/postgres";
-// import { NextApiResponse, NextApiRequest } from "next";
-import { NextFunction, Request, Response } from "express";
+import { NextApiResponse, NextApiRequest } from "next";
 import * as CryptoJS from "crypto-js";
-import { createSession } from "./userSession";
-// import { verifyJWT } from "./token";
+// import { createSession } from "./userSession";
 import jwt from "jsonwebtoken";
 
-export default async function handler(request: Request, response: Response, next: NextFunction) {
+export default async function handler(request: NextApiRequest, response: NextApiResponse) {
     if (request.method === "GET") {
-        if (!request.query.sessionId) {
-            try {
-                const userid = request.query.userid as string;
-                if (!userid) throw new Error("ID Duplication Check Error");
-                const checkId = await sql`SELECT EXISTS (SELECT userid FROM Users WHERE userid=${userid}) as isCheck;`;
-                if (checkId.rows[0].ischeck === false) {
-                    return response.json({ status_code: 1, text: "not_duplication" });
-                } else {
-                    return response.json({ status_code: 0, text: "duplication" });
-                }
-            } catch (error) {
-                return response.status(500).json({ status_code: 0, text: error });
+        try {
+            const userid = request.query.userid as string;
+            if (!userid) throw new Error("ID Duplication Check Error");
+            const checkId = await sql`SELECT EXISTS (SELECT userid FROM Users WHERE userid=${userid}) as isCheck;`;
+            if (checkId.rows[0].ischeck === false) {
+                return response.json({ status_code: 1, text: "not_duplication" });
+            } else {
+                return response.json({ status_code: 0, text: "duplication" });
             }
-        } else {
+        } catch (error) {
+            return response.status(500).json({ status_code: 0, text: error });
         }
     } else if (request.method === "POST") {
         if (!request.body.zipcode || !request.body.address || !request.body.phone || !request.body.email) {
@@ -29,12 +24,11 @@ export default async function handler(request: Request, response: Response, next
                 const userid = request.body.userid as string;
                 const password = request.body.password as string;
                 if (!userid || !password) throw new Error("Login Failed");
-                const session = createSession(userid);
+                // const session = createSession(userid);
 
                 const accessToken = jwt.sign(
                     {
                         userid: request.body.userid,
-                        sessionId: session.sessionId,
                     },
                     process.env.NEXT_PUBLIC_ACCESS_SECRET,
                     {
@@ -45,7 +39,7 @@ export default async function handler(request: Request, response: Response, next
 
                 const refreshToken = jwt.sign(
                     {
-                        sessionId: session.sessionId,
+                        name: request.body.userid,
                     },
                     process.env.NEXT_PUBLIC_REFRESH_SECRET,
                     {
@@ -54,35 +48,17 @@ export default async function handler(request: Request, response: Response, next
                     }
                 );
 
-                console.log(response);
-                console.log(response.cookie);
-
-                // response.cookie("accessToken", accessToken, {
-                //     maxAge: 12 * 60 * 60, // 12시간
-                //     httpOnly: true,
-                // });
-
-                // response.cookie("refreshToken", refreshToken, {
-                //     maxAge: 14 * 24 * 60 * 60, // 14일
-                //     httpOnly: true,
-                // });
-
-                response.setHeader(
-                    "Set-Cookie",
-                    cookie.serialize("refreshToken", refreshToken, {
-                        httpOnly: true,
-                        maxAge: 14 * 24 * 60 * 60, // 14일
-                        sameSite: "strict",
-                        path: "/",
-                    })
-                );
-
                 const checkUser = await sql`SELECT userid, password FROM users WHERE userid = ${userid};`;
-                // console.log(checkUser);
+                if (checkUser.rows.length === 0) return response.json({ status_code: 2, text: "Login ID Error" });
                 let bytes = CryptoJS.AES.decrypt(checkUser.rows[0].password, process.env.NEXT_PUBLIC_SECRET_KEY);
                 let originalText = bytes.toString(CryptoJS.enc.Utf8);
                 if (password === originalText) {
-                    return response.status(200).json({ status_code: 1, text: "Login Success", userData: session });
+                    await sql`UPDATE users SET accesstk = ${accessToken}, refreshtk = ${refreshToken} WHERE userid = ${userid};`;
+                    response.setHeader("Set-Cookie", [
+                        `accessToken=${accessToken}; HttpOnly; Path=/; Max-Age=86400; SameSite=None; Secure`,
+                        `refreshToken=${refreshToken}; HttpOnly; Path=/; Max-Age=1209600; SameSite=None; Secure`,
+                    ]);
+                    return response.status(200).json({ status_code: 1, text: "Login Success" });
                 } else {
                     return response.json({ status_code: 0, text: "Login Failed" });
                 }
@@ -105,6 +81,16 @@ export default async function handler(request: Request, response: Response, next
             } catch (error) {
                 return response.status(500).json({ status_code: 0, text: error });
             }
+        }
+    } else if (request.method === "PUT") {
+        try {
+            const accessTK = "accessTK";
+            const userid = request.body.userid as string;
+            response.setHeader("Set-Cookie", [`accessToken=; HttpOnly; Path=/; Max-Age=0; SameSite=None; Secure`]);
+            await sql`UPDATE users SET accesstk = ${accessTK} WHERE userid = ${userid};`;
+            return response.status(200).json({ status_code: 1, text: "LogOut Success" });
+        } catch (error) {
+            return response.status(500).json({ status_code: 0, text: error });
         }
     }
 }

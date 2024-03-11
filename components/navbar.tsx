@@ -6,6 +6,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import Nav from "react-bootstrap/Nav";
 import Image from "next/image";
+import axios from "axios";
 // import Modal from "./Modal";
 
 interface NavBarProps {
@@ -17,8 +18,6 @@ const NavBar: React.FC<NavBarProps> = () => {
     const loginStatus = useRecoilValue(loginState);
     const setLoginAtom = useSetRecoilState<boolean>(loginChanged);
     const setLogoutAtom = useSetRecoilState<boolean>(logoutChanged);
-    const [id, setId] = useRecoilState<string>(userIdState);
-    const [password, setPassword] = useRecoilState<string>(userPwState);
     const [width, setWidth] = useState<number>(window.innerWidth);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [login, setLogin] = useState<boolean>(false);
@@ -66,6 +65,13 @@ const NavBar: React.FC<NavBarProps> = () => {
     const handleLogout = () => {
         setLogoutAtom(() => false);
         router.push("/");
+        const userInfo = {
+            userid: window.localStorage.getItem("idText"),
+        };
+        axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`, userInfo, {
+            headers: { "Content-Type": `application/json` },
+        });
+        window.localStorage.removeItem("idText");
     };
 
     return (
@@ -136,7 +142,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                                 <>
                                     <div className="ml-10"></div>
                                     <Nav.Item className="ml-6">
-                                        <Nav.Link className="text-[#000] font-light" onClick={() => signOut()}>
+                                        <Nav.Link className="text-[#000] font-light" onClick={handleLogout}>
                                             LOGOUT
                                         </Nav.Link>
                                     </Nav.Item>
