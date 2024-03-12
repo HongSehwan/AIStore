@@ -64,6 +64,7 @@ const NavBar: React.FC<NavBarProps> = () => {
 
     const handleLogout = () => {
         setLogoutAtom(() => false);
+        alert("로그아웃 되었습니다.");
         router.push("/");
         const userInfo = {
             userid: window.localStorage.getItem("idText"),

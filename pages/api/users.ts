@@ -85,9 +85,13 @@ export default async function handler(request: NextApiRequest, response: NextApi
     } else if (request.method === "PUT") {
         try {
             const accessTK = "accessTK";
+            const refreshTK = "refreshTK";
             const userid = request.body.userid as string;
-            response.setHeader("Set-Cookie", [`accessToken=; HttpOnly; Path=/; Max-Age=0; SameSite=None; Secure`]);
-            await sql`UPDATE users SET accesstk = ${accessTK} WHERE userid = ${userid};`;
+            response.setHeader("Set-Cookie", [
+                `accessToken=; HttpOnly; Path=/; Max-Age=0; SameSite=None; Secure`,
+                `refreshToken=; HttpOnly; Path=/; Max-Age=0; SameSite=None; Secure`,
+            ]);
+            await sql`UPDATE users SET accesstk = ${accessTK}, refreshtk = ${refreshTK} WHERE userid = ${userid};`;
             return response.status(200).json({ status_code: 1, text: "LogOut Success" });
         } catch (error) {
             return response.status(500).json({ status_code: 0, text: error });
