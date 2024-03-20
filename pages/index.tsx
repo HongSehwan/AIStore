@@ -1,6 +1,10 @@
 import Image from "next/image";
 import storeItem, { ClothingItem } from "@/data/dummy";
+import { useSetRecoilState } from "recoil";
+import { loginChanged, logoutChanged } from "@/store/recoil_atoms";
 import Carousel from "@/components/carousel";
+import { useEffect } from "react";
+import axios from "axios";
 // import moment from "moment";
 
 interface StartPageProps {
@@ -23,10 +27,23 @@ const colorVariants: { [key: string]: string } = {
 };
 
 const StartPage: React.FC<StartPageProps> = () => {
+    const setLogoutAtom = useSetRecoilState<boolean>(logoutChanged);
+    const setLoginAtom = useSetRecoilState<boolean>(loginChanged);
+
     const addComma = (price: number) => {
         let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return returnString;
     };
+
+    useEffect(() => {
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/mainverify`).then((res) => {
+            if (res.data.status_code === 0) {
+                setLogoutAtom(() => false);
+            } else {
+                setLoginAtom(() => true);
+            }
+        });
+    }, []);
 
     return (
         <>

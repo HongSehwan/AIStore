@@ -26,34 +26,40 @@ export default async function handler(request: NextApiRequest, response: NextApi
                 if (!userid || !password) throw new Error("Login Failed");
                 // const session = createSession(userid);
 
-                const accessToken = jwt.sign(
-                    {
-                        userid: request.body.userid,
-                    },
-                    process.env.NEXT_PUBLIC_ACCESS_SECRET,
-                    {
-                        algorithm: "HS256",
-                        expiresIn: "1h",
-                    }
-                );
-
-                const refreshToken = jwt.sign(
-                    {
-                        name: request.body.userid,
-                    },
-                    process.env.NEXT_PUBLIC_REFRESH_SECRET,
-                    {
-                        algorithm: "HS256",
-                        expiresIn: "14d",
-                    }
-                );
-
                 const checkUser = await sql`SELECT userid, password FROM users WHERE userid = ${userid};`;
                 if (checkUser.rows.length === 0) return response.json({ status_code: 2, text: "Login ID Error" });
                 let bytes = CryptoJS.AES.decrypt(checkUser.rows[0].password, process.env.NEXT_PUBLIC_SECRET_KEY);
                 let originalText = bytes.toString(CryptoJS.enc.Utf8);
                 if (password === originalText) {
-                    await sql`UPDATE users SET accesstk = ${accessToken}, refreshtk = ${refreshToken} WHERE userid = ${userid};`;
+                    const accessToken = jwt.sign(
+                        {
+                            userid: request.body.userid,
+                        },
+                        process.env.NEXT_PUBLIC_ACCESS_SECRET,
+                        {
+                            algorithm: "HS256",
+                            expiresIn: "1h",
+                        }
+                    );
+
+                    console.log(accessToken);
+                    const base64Payload = accessToken.split(".")[1];
+                    const payload = Buffer.from(base64Payload, "base64");
+                    const result = JSON.parse(payload.toString());
+                    console.log(result);
+
+                    const refreshToken = jwt.sign(
+                        {
+                            name: request.body.userid,
+                        },
+                        process.env.NEXT_PUBLIC_REFRESH_SECRET,
+                        {
+                            algorithm: "HS256",
+                            expiresIn: "14d",
+                        }
+                    );
+
+                    await sql`UPDATE users SET refreshtk = ${refreshToken} WHERE userid = ${userid};`;
                     response.setHeader("Set-Cookie", [
                         `accessToken=${accessToken}; HttpOnly; Path=/; Max-Age=86400; SameSite=None; Secure`,
                         `refreshToken=${refreshToken}; HttpOnly; Path=/; Max-Age=1209600; SameSite=None; Secure`,
@@ -84,14 +90,13 @@ export default async function handler(request: NextApiRequest, response: NextApi
         }
     } else if (request.method === "PUT") {
         try {
-            const accessTK = "accessTK";
-            const refreshTK = "refreshTK";
+            const refreshTK = "logout";
             const userid = request.body.userid as string;
             response.setHeader("Set-Cookie", [
                 `accessToken=; HttpOnly; Path=/; Max-Age=0; SameSite=None; Secure`,
                 `refreshToken=; HttpOnly; Path=/; Max-Age=0; SameSite=None; Secure`,
             ]);
-            await sql`UPDATE users SET accesstk = ${accessTK}, refreshtk = ${refreshTK} WHERE userid = ${userid};`;
+            await sql`UPDATE users SET refreshtk = ${refreshTK} WHERE userid = ${userid};`;
             return response.status(200).json({ status_code: 1, text: "LogOut Success" });
         } catch (error) {
             return response.status(500).json({ status_code: 0, text: error });
