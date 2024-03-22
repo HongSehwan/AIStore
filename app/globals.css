@@ -87,6 +87,20 @@ body {
             width: 100%;
         }
     }
+
+    .cart-main {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(14.25rem, 100%), 1fr));
+        grid-gap: 1rem;
+        margin: 1.25rem 0;
+        padding: 0 1.25rem;
+        width: 100%;
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+    }
+
     .newIcon {
         position: absolute;
         width: 32px;
@@ -99,6 +113,20 @@ body {
         left: 112px;
         bottom: -9px;
     }
+
+    .cartNewIcon {
+        position: absolute;
+        width: 32px;
+        left: 116px;
+        bottom: 4px;
+    }
+    .cartBestIcon {
+        position: absolute;
+        width: 56px;
+        left: 104.5px;
+        bottom: -9px;
+    }
+
     .banner-main-home {
         width: 12rem;
         @media (max-width: 768px) {
