@@ -21,6 +21,12 @@ export const userPwState = atom({
     effects_UNSTABLE: [persistAtom],
 });
 
+export const cartState = atom({
+    key: "cartState",
+    default: [],
+    effects_UNSTABLE: [persistAtom],
+});
+
 export const loginChanged = selector({
     key: "loginChanged",
     get: ({ get }) => get(loginState),
@@ -31,4 +37,14 @@ export const logoutChanged = selector({
     key: "logoutChanged",
     get: ({ get }) => get(loginState),
     set: ({ set }) => set(loginState, (loginStatus) => (loginStatus = false)),
+});
+
+export const cartAdded = selector({
+    key: "cartAdded",
+    get: ({ get }) => get(cartState),
+    set: ({ set, get }, newValue) => {
+        const currentCart = get(cartState);
+        const updatedCart = [...currentCart, newValue];
+        set(cartState, updatedCart);
+    },
 });

@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import storeItem, { ClothingItem } from "@/data/dummy";
+import { useRecoilValue } from "recoil";
+import { cartState } from "@/store/recoil_atoms";
 import Image from "next/image";
 import axios from "axios";
 
@@ -23,23 +25,18 @@ const colorVariants: { [key: string]: string } = {
 };
 
 const CartPage: React.FC<CartPageProps> = () => {
-    const [cartItem, setCartItem] = useState<ClothingItem[]>([]);
+    const currentCart = useRecoilValue(cartState);
 
     const addComma = (price: number) => {
         let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return returnString;
     };
 
-    useEffect(() => {
-        let outer = storeItem.filter((item) => item.type === "outerwear");
-        setCartItem(outer);
-    }, []);
-
     return (
         <div className="flex">
             <ul className="cart-main">
-                {cartItem.length > 0 ? (
-                    cartItem.map((item, idx) => (
+                {currentCart.length > 0 ? (
+                    currentCart.map((item, idx) => (
                         <li className="shadow min-h-72 rounded-md cursor-pointer" key={idx}>
                             <div className="mb-1.5">
                                 <Image

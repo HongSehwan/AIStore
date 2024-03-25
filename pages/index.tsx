@@ -1,7 +1,7 @@
 import Image from "next/image";
 import storeItem, { ClothingItem } from "@/data/dummy";
-import { useSetRecoilState } from "recoil";
-import { loginChanged, logoutChanged } from "@/store/recoil_atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { cartState, loginChanged, logoutChanged, cartAdded } from "@/store/recoil_atoms";
 import Carousel from "@/components/carousel";
 import { useEffect } from "react";
 import axios from "axios";
@@ -27,12 +27,24 @@ const colorVariants: { [key: string]: string } = {
 };
 
 const StartPage: React.FC<StartPageProps> = () => {
+    const currentCart = useRecoilValue(cartState);
     const setLogoutAtom = useSetRecoilState<boolean>(logoutChanged);
     const setLoginAtom = useSetRecoilState<boolean>(loginChanged);
+    const setCartAtom = useSetRecoilState(cartAdded);
 
     const addComma = (price: number) => {
         let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return returnString;
+    };
+
+    const addToCart = (keyName: string, idx: number) => {
+        if (storeItem[idx].name === keyName) {
+            let currentItem = [];
+            currentItem = currentCart.filter((e: any) => e.name === keyName);
+            if (currentItem.length === 0) {
+                setCartAtom(storeItem[idx]);
+            }
+        }
     };
 
     useEffect(() => {
@@ -52,7 +64,7 @@ const StartPage: React.FC<StartPageProps> = () => {
                 <ul className="list-main">
                     {storeItem.length > 0 ? (
                         storeItem.map((item: ClothingItem, idx: number) => (
-                            <li className="shadow min-h-72 rounded-md cursor-pointer" key={idx}>
+                            <li className="shadow min-h-72 rounded-md cursor-pointer" key={idx} onClick={() => addToCart(item.name, idx)}>
                                 <div className="mb-1.5">
                                     <Image
                                         className="rounded-t max-h-56 min-h-56 object-fill"
