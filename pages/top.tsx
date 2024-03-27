@@ -62,18 +62,22 @@ const TopPage: React.FC<TopPageProps> = () => {
                                     <p>{addComma(item.price)} 원</p>
                                 </div>
                             </div>
-                            <div className="flex justify-center mb-8">
-                                <div className="flex h-3 mt-2">
+                            <div className="flex justify-center">
+                                <div className="flex h-3 mt-2 gap-1">
                                     {item.color.map((c, idx) => (
-                                        <div className={`w-3 max-h-1 mr-1 ${colorVariants[c]}`} key={idx}></div>
+                                        <div className={`w-3 max-h-1 ${colorVariants[c]}`} key={idx}></div>
                                     ))}
                                 </div>
                             </div>
-                            <div className="flex relative">
+                            <div className="w-full flex h-8 relative">
                                 {item.status === "new" ? (
-                                    <img className="newIcon" src="/icons/product_new_icon.svg" alt="NEW" />
+                                    <div className="newIcon">
+                                        <img className="w-8" src="/icons/product_new_icon.svg" alt="NEW" />
+                                    </div>
                                 ) : item.status === "best" ? (
-                                    <img className="bestIcon" src="/icons/product_best_icon.gif" alt="BEST" />
+                                    <div className="bestIcon">
+                                        <img className="w-14" src="/icons/product_best_icon.gif" alt="BEST" />
+                                    </div>
                                 ) : null}
                             </div>
                         </li>

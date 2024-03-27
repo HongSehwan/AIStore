@@ -102,15 +102,18 @@ body {
     }
 
     .newIcon {
+        display: flex;
+        width: 100%;
         position: absolute;
-        width: 32px;
-        left: 124.5px;
+        justify-content: center;
         bottom: 4px;
     }
+
     .bestIcon {
+        display: flex;
+        width: 100%;
         position: absolute;
-        width: 56px;
-        left: 112px;
+        justify-content: center;
         bottom: -9px;
     }
 

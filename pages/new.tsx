@@ -63,9 +63,9 @@ const NewPage: React.FC = () => {
                                 </div>
                             </div>
                             <div className="flex justify-center mb-2">
-                                <div className="flex h-3 mt-2">
+                                <div className="flex h-3 mt-2 gap-1">
                                     {item.color.map((c, idx) => (
-                                        <div className={`w-3 max-h-1 mr-1 ${colorVariants[c]}`} key={idx}></div>
+                                        <div className={`w-3 max-h-1 ${colorVariants[c]}`} key={idx}></div>
                                     ))}
                                 </div>
                             </div>
